@@ -3,6 +3,7 @@ import {
   AnimatePresence,
   useScroll,
   useTransform,
+  useSpring,
   useMotionValueEvent,
   MotionValue,
 } from "framer-motion";
@@ -383,35 +384,53 @@ export function Hero() {
   const [tipIndex, setTipIndex] = useState(-1);
   const [sceneIdx, setSceneIdx] = useState(-1);
 
-  // ── Wallet card ──
-  const walletY = useTransform(scrollYProgress, [0.06, 0.22], [140, 0]);
-  const walletOpacity = useTransform(scrollYProgress, [0.06, 0.20], [0, 1]);
+  // ── Spring configs (different inertia for depth layers) ──
+  const SPRING_HEAVY = { stiffness: 55,  damping: 18, restDelta: 0.001 }; // phone — most lag
+  const SPRING_MED   = { stiffness: 80,  damping: 20, restDelta: 0.001 }; // h1, wallet
+  const SPRING_LIGHT = { stiffness: 110, damping: 24, restDelta: 0.001 }; // badge, cta, pills
 
-  // ── Scroll progress bar (fills top→bottom along right edge of phone) ──
-  const progressScaleY = useTransform(scrollYProgress, [0.06, 0.96], [0, 1]);
+  // ── Wallet card ──
+  const _walletY       = useTransform(scrollYProgress, [0.06, 0.22], [140, 0]);
+  const walletY        = useSpring(_walletY, SPRING_MED);
+  const walletOpacity  = useTransform(scrollYProgress, [0.06, 0.20], [0, 1]); // opacity — no spring
+
+  // ── Scroll progress bar ──
+  const _progressScaleY = useTransform(scrollYProgress, [0.06, 0.96], [0, 1]);
+  const progressScaleY  = useSpring(_progressScaleY, SPRING_MED);
 
   // ── Phone float upward + scale in ──
-  const phoneY = useTransform(scrollYProgress, [0, 1], [0, -28]);
-  const phoneScale = useTransform(scrollYProgress, [0, 0.08], [0.95, 1]);
+  const _phoneY    = useTransform(scrollYProgress, [0, 1], [0, -28]);
+  const _phoneScale = useTransform(scrollYProgress, [0, 0.08], [0.95, 1]);
+  const phoneY     = useSpring(_phoneY, SPRING_HEAVY);
+  const phoneScale = useSpring(_phoneScale, SPRING_MED);
 
   // ── Left column parallax (different speeds for depth) ──
-  const badgeY = useTransform(scrollYProgress, [0, 1], [0, -10]);
-  const h1Y = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const subtextY = useTransform(scrollYProgress, [0, 1], [0, -22]);
-  const ctaY = useTransform(scrollYProgress, [0, 1], [0, -16]);
-  const sceneY = useTransform(scrollYProgress, [0, 1], [0, -8]);
+  const _badgeY   = useTransform(scrollYProgress, [0, 1], [0, -10]);
+  const _h1Y      = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const _subtextY = useTransform(scrollYProgress, [0, 1], [0, -22]);
+  const _ctaY     = useTransform(scrollYProgress, [0, 1], [0, -16]);
+  const _sceneY   = useTransform(scrollYProgress, [0, 1], [0, -8]);
+  const badgeY    = useSpring(_badgeY, SPRING_LIGHT);
+  const h1Y       = useSpring(_h1Y, SPRING_MED);
+  const subtextY  = useSpring(_subtextY, SPRING_MED);
+  const ctaY      = useSpring(_ctaY, SPRING_LIGHT);
+  const sceneY    = useSpring(_sceneY, SPRING_LIGHT);
 
-  // ── Background glow drifts left ──
+  // ── Background glow ──
   const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.07, 0.12, 0.07]);
 
-  // ── Floating pills appear when wallet activates ──
+  // ── Floating pills ──
   const pill1Opacity = useTransform(scrollYProgress, [0.10, 0.22], [0, 1]);
-  const pill1X = useTransform(scrollYProgress, [0.10, 0.22], [16, 0]);
-  const pill1Y = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const _pill1X      = useTransform(scrollYProgress, [0.10, 0.22], [16, 0]);
+  const _pill1Y      = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const pill1X       = useSpring(_pill1X, SPRING_LIGHT);
+  const pill1Y       = useSpring(_pill1Y, SPRING_HEAVY);
 
   const pill2Opacity = useTransform(scrollYProgress, [0.16, 0.28], [0, 1]);
-  const pill2X = useTransform(scrollYProgress, [0.16, 0.28], [-16, 0]);
-  const pill2Y = useTransform(scrollYProgress, [0, 1], [0, -10]);
+  const _pill2X      = useTransform(scrollYProgress, [0.16, 0.28], [-16, 0]);
+  const _pill2Y      = useTransform(scrollYProgress, [0, 1], [0, -10]);
+  const pill2X       = useSpring(_pill2X, SPRING_LIGHT);
+  const pill2Y       = useSpring(_pill2Y, SPRING_HEAVY);
 
   // ── Scroll hint ──
   const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
