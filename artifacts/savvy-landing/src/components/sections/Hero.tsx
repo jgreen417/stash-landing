@@ -2,172 +2,234 @@ import { motion } from "framer-motion";
 import { ArrowRight, AlertCircle, TrendingUp, CreditCard, Sparkles } from "lucide-react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
-      {/* Subtle background */}
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% -10%, hsl(190 70% 25% / 0.07) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 right-0 h-64"
-          style={{
-            background:
-              "linear-gradient(to top, hsl(40 33% 98%) 0%, transparent 100%)",
-          }}
-        />
-      </div>
+    <section className="relative w-full overflow-hidden" style={{ paddingTop: "100px", paddingBottom: "80px" }}>
+      {/* Subtle radial gradient background */}
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 50% at 50% 0%, hsl(190 70% 25% / 0.07) 0%, transparent 65%)",
+        }}
+      />
 
-      <div className="max-w-5xl mx-auto text-center">
-        {/* Badge */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={0}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-white/80 text-sm font-medium text-foreground/70 mb-8 shadow-sm"
-        >
-          <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-          Now in private waitlist
-        </motion.div>
-
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={1}
-          className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.08] mb-6"
-        >
-          Stop your points{" "}
-          <span style={{ color: "hsl(190,70%,25%)" }}>expiring.</span>
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={2}
-          className="text-xl md:text-2xl text-foreground/60 max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          Savvy is a points and card companion for Australians. Track every balance,
-          catch expiring rewards, and know your best next move — automatically.
-        </motion.p>
-
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={3}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16"
-        >
-          <a
-            href="#cta"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg hover:shadow-primary/20 active:scale-95"
-            style={{ background: "hsl(190,70%,25%)" }}
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Top text content — centered */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          {/* Badge */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={0}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-white/80 text-sm font-medium text-foreground/70 mb-8 shadow-sm"
           >
-            Get early access
-            <ArrowRight size={16} />
-          </a>
-          <a
-            href="#solution"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-foreground/80 border border-border bg-white hover:bg-muted transition-all"
-          >
-            See how it works
-          </a>
-        </motion.div>
+            <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+            Now in private waitlist
+          </motion.div>
 
-        {/* Product Mockup */}
+          <motion.h1
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={1}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.08] mb-6"
+          >
+            Stop your points{" "}
+            <span style={{ color: "hsl(190,70%,25%)" }}>expiring.</span>
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={2}
+            className="text-xl text-foreground/60 leading-relaxed mb-10"
+          >
+            Savvy is a points and card companion for Australians. Track every balance,
+            catch expiring rewards, and know your best next move — automatically.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={3}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3"
+          >
+            <a
+              href="#cta"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg active:scale-95 text-sm"
+              style={{ background: "hsl(190,70%,25%)", boxShadow: "0 4px 14px hsl(190 70% 25% / 0.3)" }}
+            >
+              Get early access
+              <ArrowRight size={15} />
+            </a>
+            <a
+              href="#solution"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-foreground/70 border border-border bg-white hover:bg-muted transition-all text-sm"
+            >
+              See how it works
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Product Mockup — constrained card */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="show"
           custom={4}
-          className="relative max-w-2xl mx-auto"
+          style={{ maxWidth: "680px", margin: "0 auto" }}
         >
-          <div className="absolute -inset-4 rounded-3xl blur-2xl opacity-20" style={{ background: "hsl(190,70%,25%)" }} />
-          <div className="relative bg-white rounded-2xl shadow-2xl border border-border/50 overflow-hidden">
-            {/* Mockup header */}
-            <div className="px-5 py-4 border-b border-border flex items-center justify-between">
-              <div className="flex items-center gap-2">
+          {/* Glow */}
+          <div
+            className="absolute -inset-6 rounded-3xl blur-3xl opacity-15 pointer-events-none"
+            style={{ background: "hsl(190,70%,25%)" }}
+          />
+
+          <div
+            className="relative bg-white rounded-2xl overflow-hidden"
+            style={{
+              border: "1px solid hsl(40 20% 88%)",
+              boxShadow: "0 20px 60px -12px rgba(0,0,0,0.15), 0 4px 16px -4px rgba(0,0,0,0.08)",
+            }}
+          >
+            {/* Window chrome */}
+            <div
+              className="flex items-center justify-between px-5 py-3"
+              style={{
+                borderBottom: "1px solid hsl(40 20% 92%)",
+                background: "hsl(40 33% 98%)",
+              }}
+            >
+              <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-red-300" />
                 <div className="w-3 h-3 rounded-full bg-yellow-300" />
                 <div className="w-3 h-3 rounded-full bg-green-300" />
               </div>
-              <span className="text-xs font-medium text-foreground/40">Savvy Dashboard</span>
-              <div className="w-16" />
+              <span className="text-xs font-medium text-foreground/35">savvy — dashboard</span>
+              <div className="w-14" />
             </div>
 
+            {/* Dashboard content */}
             <div className="p-5 space-y-4">
-              {/* Summary row */}
-              <div className="grid grid-cols-3 gap-3">
+              {/* Stats row — 3 columns */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px" }}>
                 {[
-                  { label: "Total Points Value", value: "$2,840", sub: "across 4 programs", color: "hsl(190,70%,25%)" },
-                  { label: "Expiring Soon", value: "18,400 pts", sub: "Qantas in 23 days", color: "hsl(25,90%,55%)" },
-                  { label: "Perks Unused", value: "3 perks", sub: "$180 remaining", color: "hsl(45,80%,50%)" },
+                  { label: "Total Value", value: "$2,840", sub: "across 4 programs", color: "hsl(190,70%,25%)" },
+                  { label: "Expiring Soon", value: "18,400", sub: "Qantas · 23 days", color: "hsl(25,85%,52%)" },
+                  { label: "Unused Perks", value: "3 perks", sub: "$180 remaining", color: "hsl(45,75%,42%)" },
                 ].map((item) => (
-                  <div key={item.label} className="bg-muted/50 rounded-xl p-3 text-left">
-                    <p className="text-[10px] text-foreground/50 mb-1">{item.label}</p>
-                    <p className="text-base font-bold" style={{ color: item.color }}>{item.value}</p>
-                    <p className="text-[10px] text-foreground/50">{item.sub}</p>
+                  <div
+                    key={item.label}
+                    style={{
+                      background: "hsl(40 20% 97%)",
+                      borderRadius: "12px",
+                      padding: "12px",
+                    }}
+                  >
+                    <p style={{ fontSize: "10px", color: "hsl(200 15% 55%)", marginBottom: "4px" }}>{item.label}</p>
+                    <p style={{ fontSize: "16px", fontWeight: 700, color: item.color, lineHeight: 1.2 }}>{item.value}</p>
+                    <p style={{ fontSize: "10px", color: "hsl(200 15% 60%)", marginTop: "2px" }}>{item.sub}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Cards row */}
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-foreground/50 uppercase tracking-wide">Your programs</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    { name: "Qantas Frequent Flyer", pts: "18,400", logo: "QF", color: "#E4002B", expiring: true },
-                    { name: "Velocity Frequent Flyer", pts: "42,100", logo: "VA", color: "#E11D48" },
-                    { name: "Amex Membership Rewards", pts: "67,500", logo: "AX", color: "#006FCF" },
-                    { name: "Hilton Honors", pts: "24,800", logo: "HH", color: "#054A91" },
-                  ].map((card) => (
+              {/* Section label */}
+              <p style={{ fontSize: "10px", fontWeight: 600, color: "hsl(200 15% 55%)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                Your programs
+              </p>
+
+              {/* Cards row — 2 columns */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+                {[
+                  { name: "Qantas Frequent Flyer", pts: "18,400 pts", logo: "QF", bg: "#E4002B", expiring: true },
+                  { name: "Velocity Frequent Flyer", pts: "42,100 pts", logo: "VA", bg: "#E11D48" },
+                  { name: "Amex Membership Rewards", pts: "67,500 pts", logo: "AX", bg: "#006FCF" },
+                  { name: "Hilton Honors", pts: "24,800 pts", logo: "HH", bg: "#054A91" },
+                ].map((card) => (
+                  <div
+                    key={card.name}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      padding: "10px 12px",
+                      borderRadius: "12px",
+                      border: "1px solid hsl(40 20% 91%)",
+                      background: "white",
+                    }}
+                  >
                     <div
-                      key={card.name}
-                      className="flex items-center gap-3 p-3 rounded-xl border border-border bg-white hover:shadow-sm transition-shadow"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "8px",
+                        background: card.bg,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "white",
+                        fontSize: "10px",
+                        fontWeight: 700,
+                        flexShrink: 0,
+                      }}
                     >
-                      <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[10px] font-bold shrink-0"
-                        style={{ background: card.color }}
-                      >
-                        {card.logo}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[11px] font-semibold text-foreground truncate">{card.name}</p>
-                        <p className="text-[11px] text-foreground/50">{card.pts} pts</p>
-                      </div>
-                      {card.expiring && (
-                        <AlertCircle size={12} className="shrink-0 text-orange-400" />
-                      )}
+                      {card.logo}
                     </div>
-                  ))}
-                </div>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <p style={{ fontSize: "11px", fontWeight: 600, color: "hsl(200 40% 15%)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {card.name}
+                      </p>
+                      <p style={{ fontSize: "11px", color: "hsl(200 15% 55%)" }}>{card.pts}</p>
+                    </div>
+                    {card.expiring && (
+                      <AlertCircle size={13} style={{ color: "hsl(25,85%,52%)", flexShrink: 0 }} />
+                    )}
+                  </div>
+                ))}
               </div>
 
               {/* Next best action */}
-              <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center shrink-0">
-                  <Sparkles size={14} style={{ color: "hsl(190,70%,25%)" }} />
+              <div
+                style={{
+                  borderRadius: "12px",
+                  border: "1px solid hsl(190 70% 25% / 0.18)",
+                  background: "hsl(190 70% 25% / 0.05)",
+                  padding: "14px 16px",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "8px",
+                    background: "hsl(190 70% 25% / 0.15)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <Sparkles size={13} style={{ color: "hsl(190,70%,25%)" }} />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-foreground mb-0.5">Next best action</p>
-                  <p className="text-xs text-foreground/60 leading-relaxed">
-                    Your 18,400 Qantas points expire in 23 days. Transfer to Hilton to extend validity
-                    and book a Sydney night worth ~$220.
+                  <p style={{ fontSize: "11px", fontWeight: 600, color: "hsl(200 40% 15%)", marginBottom: "3px" }}>Next best action</p>
+                  <p style={{ fontSize: "11px", color: "hsl(200 15% 50%)", lineHeight: 1.5 }}>
+                    Your 18,400 Qantas points expire in 23 days. Transfer to Hilton to extend validity — worth ~$220 in hotel stays.
                   </p>
                 </div>
               </div>
@@ -181,15 +243,15 @@ export function Hero() {
           initial="hidden"
           animate="show"
           custom={5}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-foreground/50"
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-foreground/45"
         >
           <div className="flex items-center gap-2">
-            <TrendingUp size={16} style={{ color: "hsl(190,70%,25%)" }} />
+            <TrendingUp size={15} style={{ color: "hsl(190,70%,25%)" }} />
             <span>From 2% to 14% captured rewards value</span>
           </div>
           <div className="hidden sm:block w-1 h-1 rounded-full bg-foreground/20" />
           <div className="flex items-center gap-2">
-            <CreditCard size={16} style={{ color: "hsl(190,70%,25%)" }} />
+            <CreditCard size={15} style={{ color: "hsl(190,70%,25%)" }} />
             <span>Built for the Australian market</span>
           </div>
         </motion.div>

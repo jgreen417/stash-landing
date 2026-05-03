@@ -24,39 +24,88 @@ export function Navbar() {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-border" : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: scrolled ? "1px solid hsl(40 20% 90%)" : "none",
+        boxShadow: scrolled ? "0 1px 8px rgba(0,0,0,0.05)" : "none",
+      }}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
+      <nav
+        style={{
+          maxWidth: "1152px",
+          margin: "0 auto",
+          padding: "0 24px",
+          height: "64px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "32px",
+        }}
+      >
+        <a href="#" style={{ textDecoration: "none", flexShrink: 0 }}>
           <SavvyLogo />
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop nav links */}
+        <div
+          className="hidden md:flex"
+          style={{ display: "flex", alignItems: "center", gap: "32px", flex: 1, justifyContent: "center" }}
+        >
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+              style={{
+                fontSize: "14px",
+                fontWeight: 500,
+                color: "hsl(200 40% 25%)",
+                textDecoration: "none",
+                opacity: 0.7,
+                transition: "opacity 0.15s",
+                whiteSpace: "nowrap",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
             >
               {l.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div style={{ flexShrink: 0 }} className="hidden md:block">
           <a
             href="#cta"
-            className="text-sm font-semibold px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "10px 22px",
+              borderRadius: "999px",
+              background: "hsl(190,70%,25%)",
+              color: "white",
+              fontSize: "14px",
+              fontWeight: 600,
+              textDecoration: "none",
+              transition: "opacity 0.15s",
+              whiteSpace: "nowrap",
+            }}
           >
             Join waitlist
           </a>
         </div>
 
         <button
-          className="md:hidden p-2 text-foreground"
+          className="md:hidden"
           onClick={() => setOpen(!open)}
+          style={{
+            padding: "8px",
+            color: "hsl(200 40% 15%)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+          }}
           aria-label="Toggle menu"
         >
           {open ? <X size={20} /> : <Menu size={20} />}
@@ -69,15 +118,20 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-border px-6 pb-6"
+            style={{
+              background: "white",
+              borderTop: "1px solid hsl(40 20% 90%)",
+              padding: "0 24px",
+              overflow: "hidden",
+            }}
           >
-            <div className="flex flex-col gap-4 pt-4">
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: "16px", paddingBottom: "24px" }}>
               {links.map((l) => (
                 <a
                   key={l.label}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground"
+                  style={{ fontSize: "14px", fontWeight: 500, color: "hsl(200 40% 20%)", textDecoration: "none" }}
                 >
                   {l.label}
                 </a>
@@ -85,7 +139,17 @@ export function Navbar() {
               <a
                 href="#cta"
                 onClick={() => setOpen(false)}
-                className="text-sm font-semibold px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-center hover:opacity-90 transition-opacity"
+                style={{
+                  display: "inline-flex",
+                  justifyContent: "center",
+                  padding: "12px 24px",
+                  borderRadius: "999px",
+                  background: "hsl(190,70%,25%)",
+                  color: "white",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
               >
                 Join waitlist
               </a>
@@ -98,23 +162,12 @@ export function Navbar() {
 }
 
 export function SavvyLogo({ size = "default" }: { size?: "default" | "large" }) {
-  const textSize = size === "large" ? "text-2xl" : "text-xl";
+  const fontSize = size === "large" ? "22px" : "18px";
   return (
-    <span className={`font-bold ${textSize} tracking-tight flex items-center gap-1.5`}>
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M11 2C6.03 2 2 6.03 2 11s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"
-          fill="hsl(190,70%,25%)"
-          opacity="0.15"
-        />
-        <path
-          d="M7 11.5l2.5 2.5 5.5-6"
-          stroke="hsl(190,70%,25%)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="11" cy="11" r="8.5" stroke="hsl(190,70%,25%)" strokeWidth="1.5" />
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontWeight: 700, fontSize, letterSpacing: "-0.01em" }}>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="9" stroke="hsl(190,70%,25%)" strokeWidth="1.5" />
+        <path d="M6.5 10.5l2 2 5-5" stroke="hsl(190,70%,25%)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span style={{ color: "hsl(190,70%,25%)" }}>savvy</span>
     </span>
