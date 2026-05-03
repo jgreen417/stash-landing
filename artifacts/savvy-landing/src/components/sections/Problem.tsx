@@ -1,6 +1,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Clock, SplitSquareHorizontal, AlertTriangle, Gift, Layers } from "lucide-react";
+import {
+  Clock,
+  SplitSquareHorizontal,
+  AlertTriangle,
+  Gift,
+  Layers,
+} from "lucide-react";
 
 const problems = [
   {
@@ -60,7 +66,8 @@ export function Problem() {
             Rewards are broken for most Australians.
           </h2>
           <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            You earned the points. You pay the annual fees. But value keeps slipping through the cracks.
+            You earned the points. You pay the annual fees. But value keeps
+            slipping through the cracks.
           </p>
         </motion.div>
 
@@ -79,7 +86,10 @@ export function Problem() {
                   duration: 0.55,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                whileHover={{
+                  y: -4,
+                  transition: { type: "spring", stiffness: 300, damping: 20 },
+                }}
                 className={`p-6 rounded-2xl border border-border bg-white hover:shadow-lg hover:border-primary/20 transition-shadow cursor-default ${
                   i === 4 ? "md:col-span-2 lg:col-span-1" : ""
                 }`}
@@ -93,8 +103,12 @@ export function Problem() {
                 >
                   <Icon size={18} className="text-foreground/60" />
                 </motion.div>
-                <h3 className="font-semibold text-base text-foreground mb-2">{p.title}</h3>
-                <p className="text-sm text-foreground/55 leading-relaxed">{p.body}</p>
+                <h3 className="font-semibold text-base text-foreground mb-2">
+                  {p.title}
+                </h3>
+                <p className="text-sm text-foreground/55 leading-relaxed">
+                  {p.body}
+                </p>
               </motion.div>
             );
           })}
@@ -112,10 +126,16 @@ export function Problem() {
             initial={{ scaleX: 0 }}
             animate={inView ? { scaleX: 1 } : {}}
             transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{ height: "1px", background: "hsl(40 20% 88%)", marginBottom: "16px", transformOrigin: "left" }}
+            style={{
+              height: "1px",
+              background: "hsl(40 20% 88%)",
+              marginBottom: "16px",
+              transformOrigin: "left",
+            }}
           />
           <p className="text-sm text-foreground/40 italic">
-            The average Australian household has 3.2 loyalty program memberships and captures less than 30% of potential value.
+            The average Australian household has 3.2 loyalty program memberships
+            and captures less than 30% of potential value.
           </p>
         </motion.div>
       </div>
