@@ -41,9 +41,9 @@ export function Solution() {
     >
       <div className="max-w-5xl mx-auto" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 block">
@@ -58,27 +58,63 @@ export function Solution() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Connector line on desktop */}
-          <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          {/* Connector line draws itself */}
+          <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px overflow-hidden">
+            <div style={{ height: "1px", background: "hsl(40 20% 88%)", position: "absolute", inset: 0 }} />
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={inView ? { scaleX: 1 } : {}}
+              transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                position: "absolute", inset: 0, height: "1px",
+                background: "linear-gradient(to right, transparent, hsl(190,70%,25%), transparent)",
+                transformOrigin: "left",
+              }}
+            />
+          </div>
 
           {layers.map((layer, i) => {
             const Icon = layer.icon;
             return (
               <motion.div
                 key={layer.number}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="relative flex flex-col"
+                initial={{ opacity: 0, y: 40, scale: 0.94 }}
+                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{
+                  delay: i * 0.14,
+                  duration: 0.65,
+                  type: "spring",
+                  stiffness: 180,
+                  damping: 22,
+                }}
+                whileHover={{ y: -6, transition: { type: "spring", stiffness: 280, damping: 18 } }}
+                className="relative flex flex-col cursor-default"
               >
-                <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-border shadow-sm hover:shadow-md transition-shadow">
-                  <div
+                <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-border shadow-sm hover:shadow-md hover:border-primary/25 transition-shadow">
+                  {/* Icon pops in with spring after card */}
+                  <motion.div
+                    initial={{ scale: 0.2, rotate: -20, opacity: 0 }}
+                    animate={inView ? { scale: 1, rotate: 0, opacity: 1 } : {}}
+                    transition={{
+                      delay: i * 0.14 + 0.2,
+                      type: "spring",
+                      stiffness: 280,
+                      damping: 16,
+                    }}
                     className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 relative z-10"
-                    style={{ background: "hsl(190,70%,25%)", boxShadow: "0 4px 16px hsl(190 70% 25% / 0.25)" }}
+                    style={{ background: "hsl(190,70%,25%)", boxShadow: "0 4px 16px hsl(190 70% 25% / 0.3)" }}
                   >
                     <Icon size={22} className="text-white" />
-                  </div>
-                  <span className="text-xs font-bold text-foreground/25 tracking-widest mb-2">{layer.number}</span>
+                  </motion.div>
+
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={inView ? { opacity: 1 } : {}}
+                    transition={{ delay: i * 0.14 + 0.35, duration: 0.4 }}
+                    className="text-xs font-bold text-foreground/25 tracking-widest mb-2"
+                  >
+                    {layer.number}
+                  </motion.span>
                   <h3 className="text-lg font-semibold text-foreground mb-3">{layer.title}</h3>
                   <p className="text-sm text-foreground/60 leading-relaxed mb-4">{layer.body}</p>
                   <span className="text-xs text-foreground/40 italic">{layer.detail}</span>

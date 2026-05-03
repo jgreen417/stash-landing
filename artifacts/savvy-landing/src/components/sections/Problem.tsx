@@ -30,6 +30,16 @@ const problems = [
   },
 ];
 
+const iconVariant = {
+  hidden: { scale: 0.4, rotate: -15, opacity: 0 },
+  show: {
+    scale: 1,
+    rotate: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 260, damping: 18 },
+  },
+};
+
 export function Problem() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -38,9 +48,9 @@ export function Problem() {
     <section id="problem" className="py-24 px-6">
       <div className="max-w-5xl mx-auto" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 block">
@@ -57,19 +67,32 @@ export function Problem() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {problems.map((p, i) => {
             const Icon = p.icon;
+            /* Alternating slide direction: left column from left, right column from right */
+            const xDir = i % 2 === 0 ? -28 : 28;
             return (
               <motion.div
                 key={p.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className={`p-6 rounded-2xl border border-border bg-white hover:shadow-md transition-shadow ${
+                initial={{ opacity: 0, x: xDir, y: 16 }}
+                animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+                transition={{
+                  delay: i * 0.07,
+                  duration: 0.55,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className={`p-6 rounded-2xl border border-border bg-white hover:shadow-lg hover:border-primary/20 transition-shadow cursor-default ${
                   i === 4 ? "md:col-span-2 lg:col-span-1" : ""
                 }`}
               >
-                <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mb-4">
+                <motion.div
+                  variants={iconVariant}
+                  initial="hidden"
+                  animate={inView ? "show" : "hidden"}
+                  transition={{ delay: i * 0.07 + 0.12 }}
+                  className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mb-4"
+                >
                   <Icon size={18} className="text-foreground/60" />
-                </div>
+                </motion.div>
                 <h3 className="font-semibold text-base text-foreground mb-2">{p.title}</h3>
                 <p className="text-sm text-foreground/55 leading-relaxed">{p.body}</p>
               </motion.div>
@@ -77,12 +100,20 @@ export function Problem() {
           })}
         </div>
 
+        {/* Animated stat line */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.55, duration: 0.6 }}
           className="mt-10 text-center"
         >
+          {/* Rule line draws in */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={inView ? { scaleX: 1 } : {}}
+            transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            style={{ height: "1px", background: "hsl(40 20% 88%)", marginBottom: "16px", transformOrigin: "left" }}
+          />
           <p className="text-sm text-foreground/40 italic">
             The average Australian household has 3.2 loyalty program memberships and captures less than 30% of potential value.
           </p>

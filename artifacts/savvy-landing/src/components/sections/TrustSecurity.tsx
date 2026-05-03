@@ -43,9 +43,9 @@ export function TrustSecurity() {
     >
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 block">
@@ -59,19 +59,24 @@ export function TrustSecurity() {
           </p>
         </motion.div>
 
-        {/* Main trust card */}
+        {/* Main trust card — scale + slide entry */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.6 }}
+          initial={{ opacity: 0, y: 32, scale: 0.96 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ delay: 0.1, duration: 0.7, type: "spring", stiffness: 160, damping: 22 }}
           className="mb-6 rounded-2xl border border-primary/20 overflow-hidden"
           style={{ background: "linear-gradient(135deg, hsl(190 70% 25%) 0%, hsl(200 60% 20%) 100%)" }}
         >
           <div className="p-8 md:p-10 text-white">
             <div className="flex items-start gap-5">
-              <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center shrink-0">
+              {/* Pulsing shield icon */}
+              <motion.div
+                className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center shrink-0"
+                animate={{ boxShadow: ["0 0 0 0 rgba(255,255,255,0)", "0 0 0 10px rgba(255,255,255,0.07)", "0 0 0 0 rgba(255,255,255,0)"] }}
+                transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut", delay: 1 }}
+              >
                 <ShieldCheck size={26} className="text-white" />
-              </div>
+              </motion.div>
               <div>
                 <h3 className="text-xl font-semibold mb-2">Your trust comes first.</h3>
                 <p className="text-white/75 leading-relaxed max-w-2xl">
@@ -87,20 +92,35 @@ export function TrustSecurity() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {pillars.map((pillar, i) => {
             const Icon = pillar.icon;
+            const xDir = i % 2 === 0 ? -20 : 20;
             return (
               <motion.div
                 key={pillar.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
-                className="p-6 rounded-2xl bg-white border border-border hover:shadow-sm transition-shadow"
+                initial={{ opacity: 0, x: xDir, y: 18, scale: 0.97 }}
+                animate={inView ? { opacity: 1, x: 0, y: 0, scale: 1 } : {}}
+                transition={{
+                  delay: 0.18 + i * 0.07,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 22,
+                }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className="p-6 rounded-2xl bg-white border border-border hover:border-primary/20 hover:shadow-md transition-shadow cursor-default"
               >
-                <div
+                <motion.div
+                  initial={{ scale: 0.4, rotate: -12, opacity: 0 }}
+                  animate={inView ? { scale: 1, rotate: 0, opacity: 1 } : {}}
+                  transition={{
+                    delay: 0.25 + i * 0.07,
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 16,
+                  }}
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
                   style={{ background: "hsl(190 70% 25% / 0.08)" }}
                 >
                   <Icon size={17} style={{ color: "hsl(190,70%,25%)" }} />
-                </div>
+                </motion.div>
                 <h3 className="font-semibold text-sm text-foreground mb-2">{pillar.title}</h3>
                 <p className="text-sm text-foreground/55 leading-relaxed">{pillar.body}</p>
               </motion.div>
