@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowRight, AlertCircle, TrendingUp, CreditCard, Sparkles, Bell, Wifi, Battery } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { ArrowRight, AlertCircle, TrendingUp, CreditCard, Sparkles, Bell, Wifi, Battery, ChevronRight } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,9 +11,166 @@ const fadeUp = {
   }),
 };
 
-function PhoneMockup() {
+const WALLET_TIPS = [
+  {
+    scene: "At Woolworths",
+    logo: "AX",
+    logoBg: "linear-gradient(135deg, #006FCF 0%, #0057a8 100%)",
+    card: "Amex Gold",
+    earn: "3× points on groceries",
+    value: "+240 pts",
+    valueBg: "hsl(140,60%,35%)",
+  },
+  {
+    scene: "At Sydney Airport",
+    logo: "VA",
+    logoBg: "linear-gradient(135deg, #E11D48 0%, #b0142f 100%)",
+    card: "Velocity Flyer",
+    earn: "Free lounge access available",
+    value: "Perk",
+    valueBg: "hsl(45,80%,40%)",
+  },
+  {
+    scene: "Hotel booking",
+    logo: "HH",
+    logoBg: "linear-gradient(135deg, #054A91 0%, #033160 100%)",
+    card: "Hilton Honors",
+    earn: "10× pts + status night",
+    value: "+1,200 pts",
+    valueBg: "hsl(190,70%,30%)",
+  },
+];
+
+function WalletCard({ tip }: { tip: typeof WALLET_TIPS[0] }) {
   return (
-    /* Phone shell */
+    <motion.div
+      key={tip.scene}
+      initial={{ y: 120, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 80, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 320, damping: 32, mass: 0.9 }}
+      style={{
+        position: "absolute",
+        bottom: "22px",
+        left: "12px",
+        right: "12px",
+        borderRadius: "20px",
+        overflow: "hidden",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.08)",
+        zIndex: 10,
+      }}
+    >
+      {/* Frosted backdrop */}
+      <div
+        style={{
+          background: "rgba(20, 22, 35, 0.82)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          padding: "14px",
+        }}
+      >
+        {/* Header row */}
+        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "10px" }}>
+          <Sparkles size={10} style={{ color: "hsl(45,85%,65%)" }} />
+          <span style={{ fontSize: "9px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "hsl(45,85%,65%)" }}>
+            Savvy suggests
+          </span>
+          <span style={{ marginLeft: "auto", fontSize: "9px", color: "rgba(255,255,255,0.4)", fontWeight: 500 }}>
+            {tip.scene}
+          </span>
+        </div>
+
+        {/* Card row */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* Card logo */}
+          <div
+            style={{
+              width: "40px",
+              height: "28px",
+              borderRadius: "7px",
+              background: tip.logoBg,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+              fontSize: "10px",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              flexShrink: 0,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+            }}
+          >
+            {tip.logo}
+          </div>
+
+          {/* Text */}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: "13px", fontWeight: 700, color: "white", marginBottom: "2px" }}>
+              {tip.card}
+            </p>
+            <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.5)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {tip.earn}
+            </p>
+          </div>
+
+          {/* Earn badge */}
+          <div
+            style={{
+              padding: "4px 8px",
+              borderRadius: "8px",
+              background: tip.valueBg,
+              display: "flex",
+              alignItems: "center",
+              gap: "3px",
+              flexShrink: 0,
+            }}
+          >
+            <span style={{ fontSize: "10px", fontWeight: 700, color: "white" }}>{tip.value}</span>
+            <ChevronRight size={9} style={{ color: "rgba(255,255,255,0.7)" }} />
+          </div>
+        </div>
+
+        {/* Progress dots */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "4px", marginTop: "12px" }}>
+          {WALLET_TIPS.map((t) => (
+            <div
+              key={t.scene}
+              style={{
+                width: t.scene === tip.scene ? "16px" : "4px",
+                height: "4px",
+                borderRadius: "4px",
+                background: t.scene === tip.scene ? "hsl(45,85%,65%)" : "rgba(255,255,255,0.2)",
+                transition: "all 0.3s ease",
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function PhoneMockup() {
+  const [tipIndex, setTipIndex] = useState(-1); // -1 = not shown yet
+
+  useEffect(() => {
+    // First card slides in after 1.4s
+    const show = setTimeout(() => setTipIndex(0), 1400);
+    return () => clearTimeout(show);
+  }, []);
+
+  useEffect(() => {
+    if (tipIndex < 0) return;
+    // Cycle every 3.5s
+    const cycle = setTimeout(() => {
+      setTipIndex((prev) => (prev + 1) % WALLET_TIPS.length);
+    }, 3500);
+    return () => clearTimeout(cycle);
+  }, [tipIndex]);
+
+  const tip = tipIndex >= 0 ? WALLET_TIPS[tipIndex] : null;
+
+  return (
     <div
       style={{
         width: "300px",
@@ -42,6 +200,7 @@ function PhoneMockup() {
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
+          position: "relative",
         }}
       >
         {/* Status bar */}
@@ -56,7 +215,6 @@ function PhoneMockup() {
           }}
         >
           <span style={{ fontSize: "11px", fontWeight: 700, color: "hsl(200 40% 15%)" }}>9:41</span>
-          {/* Dynamic island */}
           <div style={{ width: "80px", height: "24px", borderRadius: "20px", background: "#0f0f1a", position: "absolute", left: "50%", transform: "translateX(-50%)", top: "10px" }} />
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <Wifi size={11} style={{ color: "hsl(200 40% 20%)" }} />
@@ -94,7 +252,7 @@ function PhoneMockup() {
         </div>
 
         {/* Scrollable content */}
-        <div style={{ flex: 1, overflowY: "auto", padding: "0 14px 20px" }}>
+        <div style={{ flex: 1, overflowY: "hidden", padding: "0 14px 20px" }}>
           {/* Total value card */}
           <div
             style={{
@@ -165,7 +323,6 @@ function PhoneMockup() {
             { name: "Qantas Frequent Flyer", pts: "18,400 pts", logo: "QF", bg: "#E4002B", expiring: true },
             { name: "Velocity Frequent Flyer", pts: "42,100 pts", logo: "VA", bg: "#E11D48" },
             { name: "Amex Rewards", pts: "67,500 pts", logo: "AX", bg: "#006FCF" },
-            { name: "Hilton Honors", pts: "24,800 pts", logo: "HH", bg: "#054A91" },
           ].map((card) => (
             <div
               key={card.name}
@@ -190,36 +347,17 @@ function PhoneMockup() {
               {card.expiring && <AlertCircle size={12} style={{ color: "hsl(25,85%,52%)", flexShrink: 0 }} />}
             </div>
           ))}
-
-          {/* Next best action */}
-          <div
-            style={{
-              marginTop: "8px",
-              borderRadius: "16px",
-              border: "1px solid hsl(190 70% 25% / 0.2)",
-              background: "hsl(190 70% 25% / 0.05)",
-              padding: "13px 14px",
-              display: "flex",
-              alignItems: "flex-start",
-              gap: "10px",
-            }}
-          >
-            <div style={{ width: "28px", height: "28px", borderRadius: "8px", background: "hsl(190 70% 25% / 0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-              <Sparkles size={13} style={{ color: "hsl(190,70%,25%)" }} />
-            </div>
-            <div>
-              <p style={{ fontSize: "10px", fontWeight: 700, color: "hsl(200 40% 15%)", marginBottom: "3px" }}>Next best action</p>
-              <p style={{ fontSize: "10px", color: "hsl(200 15% 50%)", lineHeight: 1.5 }}>
-                Transfer Qantas points to Hilton now — worth ~$220 in Sydney stays.
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Home indicator */}
-        <div style={{ paddingBottom: "10px", display: "flex", justifyContent: "center", flexShrink: 0 }}>
+        <div style={{ paddingBottom: "10px", display: "flex", justifyContent: "center", flexShrink: 0, zIndex: 1 }}>
           <div style={{ width: "100px", height: "4px", borderRadius: "4px", background: "hsl(200 40% 15% / 0.15)" }} />
         </div>
+
+        {/* Wallet card overlay — slides up from bottom */}
+        <AnimatePresence mode="wait">
+          {tip && <WalletCard key={tip.scene} tip={tip} />}
+        </AnimatePresence>
       </div>
     </div>
   );
