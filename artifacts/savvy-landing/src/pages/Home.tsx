@@ -1,0 +1,29 @@
+import { Hero } from "@/components/sections/Hero";
+import { Problem } from "@/components/sections/Problem";
+import { Solution } from "@/components/sections/Solution";
+import { Features } from "@/components/sections/Features";
+import { TrustSecurity } from "@/components/sections/TrustSecurity";
+import { Audience } from "@/components/sections/Audience";
+import { Pricing } from "@/components/sections/Pricing";
+import { FinalCTA } from "@/components/sections/FinalCTA";
+import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
+
+export default function Home() {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-1">
+        <Hero />
+        <Problem />
+        <Solution />
+        <Features />
+        <TrustSecurity />
+        <Audience />
+        <Pricing />
+        <FinalCTA />
+      </main>
+      <Footer />
+    </div>
+  );
+}

@@ -1,0 +1,147 @@
+Use this as the prompt:
+
+Build a polished landing page website for a startup called **Savvy**.
+
+Savvy is an AI-powered rewards copilot for Australians. It helps people get more value from the credit cards and loyalty programs they already have. The product is **not** about crypto, bitcoin, bill payments, or giving regulated financial advice. It is about tracking cards and loyalty accounts, preventing points expiry, surfacing unused perks, helping users redeem points more intelligently, and giving proactive factual guidance.[1][2][3]
+
+## Goal
+
+Create a convincing startup marketing site that explains the product clearly and makes it feel modern, trustworthy, premium, and easy to understand. The main audience is:
+- Australians aged 20–40 who want help understanding and optimising points and card benefits.
+- Older users with points balances and expiring rewards who need simplicity and protection.[4]
+
+The page should feel like a real venture-backed consumer fintech / travel rewards startup, but with a stronger trust and security tone than a generic “AI finance app.”[2]
+
+## Core positioning
+
+Savvy helps users:
+- Track all credit cards and loyalty programs in one place.[3][1]
+- Prevent points, credits, and perks from expiring unused.[1][2][3]
+- See the best next action in plain English, using factual rules rather than financial advice.[5][2]
+- Get more value from Qantas points, Velocity points, Amex Membership Rewards, hotel programs, and card benefits.[1]
+- Feel protected from wasted value and loyalty account neglect.[2]
+
+## Messaging to communicate
+
+Use messaging like:
+- “Stop your points expiring.”
+- “Track every card, points balance, and perk in one place.”
+- “Know your best next move before value disappears.”
+- “From 2% captured rewards value to 14%.”
+- “Your rewards, working in the background.”
+- “Savvy is a points and card companion for Australians.”
+
+Do **not** frame it as:
+- “best card for you”
+- “financial advice”
+- “credit broking”
+- “crypto rewards”
+- “buy/sell points”
+- “bill pay”
+- “investment platform”
+
+## Sections to include
+
+Build a single long-scroll homepage with these sections:
+
+1. Hero section  
+- Strong headline and subheadline.
+- Primary CTA: “Join waitlist” or “Get early access”.
+- Secondary CTA: “See how it works”.
+- Show a product mockup or dashboard-style UI preview.
+
+2. Problem section  
+Explain the pain:
+- People juggle too many loyalty programs.
+- They use the wrong card for the wrong purchase.
+- Points expire silently.
+- Credits and perks go unused.
+- Rewards programs are fragmented and confusing.[1]
+
+3. Solution section  
+Explain Savvy as a 3-layer system:
+- AI assistant for instant guidance.
+- Unified dashboard for cards, points, and perks.
+- Human experts later for complex redemption/travel scenarios.
+
+4. Features section  
+Highlight:
+- All cards and loyalty programs in one place.[3][1]
+- Expiry and unused-perk alerts.[2][3][1]
+- Points redemption helper.[3][1]
+- Proactive “next best action” feed.[6][7][2]
+- Travel rewards planning using points already owned.
+
+5. Trust / security section  
+This is important. Emphasise:
+- Security-first design.
+- Read-only aggregation where possible.
+- Sensitive data handled carefully.
+- Clear explanation of why users should trust the platform.
+- Position trust as part of the product, not a footnote.
+
+6. Audience / use cases section  
+Two user profiles:
+- Young professionals learning how to use rewards properly.[4]
+- Older users with dormant or expiring points balances.[4]
+
+7. Pricing / plans section  
+Show a simple 3-tier structure:
+- Entry
+- Premium
+- Family / Concierge  
+Make it look realistic, but pricing can be placeholder. Mention that higher tiers add deeper optimisation and human help.
+
+8. Final CTA section  
+Strong signup / waitlist call to action.
+
+## Design direction
+
+The site should look premium, trustworthy, elegant, and modern. Avoid generic AI startup aesthetics.
+
+Visual direction:
+- Fintech + travel + premium utility.
+- Clean layout, lots of whitespace, high trust.
+- Mobile-first responsive.
+- Light mode default, optional dark mode.
+- Soft premium palette: off-white / warm neutral base, deep teal or deep blue accent, maybe subtle gold accents for “rewards”.
+- Avoid purple neon, glowing blobs, and clichéd AI gradients.
+- Avoid cheesy crypto aesthetics.
+- Use tasteful icons, card mockups, travel/rewards/dashboard visuals.
+- The product should feel like “wealth utility for rewards” rather than “hype startup”.
+
+## Tone
+
+Write clear, sharp copy. Make it sound credible and consumer-friendly. Not too corporate, not too hypey. Avoid buzzword overload.
+
+Tone should be:
+- confident
+- trustworthy
+- helpful
+- premium
+- Australian-market aware
+
+## Important constraints
+
+- This is a marketing website, not the actual app.
+- Do not build login flows or backend.
+- Do not include crypto, BTC, blockchain, tokenization, or buying/selling points.
+- Do not include bill payments.
+- Do not present the company as giving financial advice.
+- Keep the wording factual and careful around card guidance.
+
+## Deliverable
+
+Generate a complete, beautiful startup landing page with strong copy, polished layout, product mockups/placeholders, sections listed above, and production-quality styling.
+
+If helpful, invent a tasteful Savvy logo and visual identity.
+
+Sources
+[1] We wont give financial advice. More to help track credit card usage, help use points better . what do you think https://www.perplexity.ai/search/c5352c4b-fd08-44db-8075-08f743f6c38e
+[2] so what is the product pitch now? https://www.perplexity.ai/search/53ae9a10-3ff1-4332-ad48-6edc220796e3
+[3] try map the mvp https://www.perplexity.ai/search/5446acf8-2b4a-4caf-aa3f-2de06d38a951
+[4] The market would be 20-40s still getting a hold on the financial game, and 70+ with expiring points and no idea what to do https://www.perplexity.ai/search/69a143fc-5768-459b-ae98-2db4602c8c94
+[5] So with credit card points - they have a monthly cap? Always? 
+Wallet use case can pull from the users info - calendar (ie what they are doing/where they are), locaiton , time of day etc - informed decisions help drive the information https://www.perplexity.ai/search/ccb5808a-c2ae-4600-bdf9-52cb5682b31e
+[6] Ok this sounds good. Someway to integrate it into a persons day to day. Young users - perhaps a dynamic apple / android wallet card - gives information on nsomething??? . Honestly some way to make the information proactive, rather than get people to go in nthe app. does that make sense https://www.perplexity.ai/search/5cc709a0-a768-47c3-91fb-b38b2e6eed4d
+[7] What information could sit in the apple wallet - ie. when they go to pay, it shows them information about best card to use (based on ??) some https://www.perplexity.ai/search/fd03b67d-e0b2-4174-b854-47869d7e1012
