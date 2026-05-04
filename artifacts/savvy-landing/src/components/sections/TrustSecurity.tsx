@@ -6,7 +6,7 @@ const pillars = [
   {
     icon: Eye,
     title: "Read-only by design",
-    body: "Savvy reads your loyalty account balances and card data — it never makes transactions, transfers, or changes on your behalf.",
+    body: "Stash reads your loyalty account balances and card data — it never makes transactions, transfers, or changes on your behalf.",
   },
   {
     icon: Lock,
@@ -26,7 +26,7 @@ const pillars = [
   {
     icon: FileText,
     title: "Factual guidance, not advice",
-    body: "Savvy provides factual information about your points and perks. We are not a financial adviser and do not provide licensed financial advice.",
+    body: "Stash provides factual information about your points and perks. We are not a financial adviser and do not provide licensed financial advice.",
   },
 ];
 
@@ -80,8 +80,8 @@ export function TrustSecurity() {
               <div>
                 <h3 className="text-xl font-semibold mb-2">Your trust comes first.</h3>
                 <p className="text-white/75 leading-relaxed max-w-2xl">
-                  We built Savvy knowing that connecting financial accounts requires real trust. That's why security
-                  isn't bolted on as an afterthought — it's designed into how Savvy works from the ground up.
+                  We built Stash knowing that connecting financial accounts requires real trust. That's why security
+                  isn't bolted on as an afterthought — it's designed into how Stash works from the ground up.
                   Read-only access. Encrypted storage. Australian data residency. Clear controls. Always.
                 </p>
               </div>

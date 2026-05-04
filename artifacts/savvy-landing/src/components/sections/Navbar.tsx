@@ -45,10 +45,9 @@ export function Navbar() {
         }}
       >
         <a href="#" style={{ textDecoration: "none", flexShrink: 0 }}>
-          <SavvyLogo />
+          <StashLogo />
         </a>
 
-        {/* Desktop nav links */}
         <div
           className="hidden md:flex"
           style={{ display: "flex", alignItems: "center", gap: "32px", flex: 1, justifyContent: "center" }}
@@ -161,15 +160,38 @@ export function Navbar() {
   );
 }
 
-export function SavvyLogo({ size = "default" }: { size?: "default" | "large" }) {
+export function StashLogo({ size = "default" }: { size?: "default" | "large" }) {
   const fontSize = size === "large" ? "22px" : "18px";
+  const iconSize = size === "large" ? 28 : 22;
+  const scale = iconSize / 28;
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontWeight: 700, fontSize, letterSpacing: "-0.01em" }}>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="9" stroke="hsl(190,70%,25%)" strokeWidth="1.5" />
-        <path d="M6.5 10.5l2 2 5-5" stroke="hsl(190,70%,25%)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "9px", fontWeight: 800, fontSize, letterSpacing: "-0.02em" }}>
+      {/* Treasure chest with cards */}
+      <svg
+        width={iconSize}
+        height={Math.round(24 * scale)}
+        viewBox="0 0 28 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Left card — tilted */}
+        <rect x="1" y="4" width="10.5" height="7" rx="1.4" fill="hsl(190,55%,40%)" transform="rotate(-16 6.25 7.5)" />
+        {/* Centre card — gold, straight */}
+        <rect x="8.75" y="0" width="10.5" height="7" rx="1.4" fill="hsl(45,80%,52%)" />
+        {/* Right card — tilted */}
+        <rect x="16.5" y="4" width="10.5" height="7" rx="1.4" fill="hsl(190,70%,25%)" transform="rotate(16 21.75 7.5)" />
+        {/* Chest lid */}
+        <rect x="2" y="9.5" width="24" height="5.5" rx="3" fill="hsl(190,58%,30%)" />
+        {/* Chest body */}
+        <rect x="2" y="13" width="24" height="11" rx="3" fill="hsl(190,70%,25%)" />
+        {/* Lid/body seam */}
+        <rect x="2" y="14.5" width="24" height="0.75" fill="rgba(0,0,0,0.14)" />
+        {/* Gold latch */}
+        <rect x="10.5" y="15.5" width="7" height="5" rx="1.6" fill="hsl(45,80%,50%)" />
+        {/* Latch shine */}
+        <rect x="10.5" y="15.5" width="7" height="2.2" rx="1.6" fill="rgba(255,255,255,0.28)" />
       </svg>
-      <span style={{ color: "hsl(190,70%,25%)" }}>savvy</span>
+      <span style={{ color: "hsl(190,70%,25%)" }}>stash</span>
     </span>
   );
 }

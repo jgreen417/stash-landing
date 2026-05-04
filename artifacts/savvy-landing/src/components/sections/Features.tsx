@@ -12,25 +12,25 @@ const features = [
   {
     icon: BellRing,
     title: "Expiry and perk alerts",
-    body: "Savvy watches your accounts 24/7 and notifies you before points expire or perks are about to lapse — with time to act.",
+    body: "Stash watches your accounts 24/7 and notifies you before points expire or perks are about to lapse — with time to act.",
     highlight: "Never lose value silently again.",
   },
   {
     icon: Route,
     title: "Points redemption helper",
-    body: "Explore what your points are actually worth. Savvy shows real redemption options ranked by value — flights, hotels, transfers, cashback.",
+    body: "Explore what your points are actually worth. Stash shows real redemption options ranked by value — flights, hotels, transfers, cashback.",
     highlight: "Get the most from every point.",
   },
   {
     icon: Flame,
     title: "Proactive next best action",
-    body: "A personalised feed of what to do right now. Transfer here, use this card there, claim this perk before it expires. Factual, timely, specific.",
+    body: "A personalised feed of what to do right now — transfer here, use this card there, claim this perk before it expires. Factual, timely, specific.",
     highlight: "Guidance that fits your life.",
   },
   {
     icon: Plane,
     title: "Travel rewards planning",
-    body: "Working towards a trip? Savvy helps you map the fastest path using points you already have — and flags gaps before you book.",
+    body: "Working towards a trip? Stash helps you map the fastest path using points you already have — and flags gaps before you book.",
     highlight: "Points-first travel planning.",
   },
 ];
@@ -55,7 +55,7 @@ export function Features() {
             Everything working in the background.
           </h2>
           <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            Savvy runs quietly behind the scenes so you capture more value without the effort.
+            Stash runs quietly behind the scenes so you capture more value without the effort.
           </p>
         </motion.div>
 

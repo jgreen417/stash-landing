@@ -8,7 +8,7 @@ const profiles = [
     tag: "Young professionals",
     age: "Ages 20–40",
     headline: "You've got the cards. Now get the most out of them.",
-    body: "You've signed up for the Amex, the Qantas card, maybe a hotel program. But optimising across all of them takes time you don't have. Savvy does the monitoring, surfaces the opportunities, and tells you exactly what to do next — so you're not leaving points on the table every month.",
+    body: "You've signed up for the Amex, the Qantas card, maybe a hotel program. But optimising across all of them takes time you don't have. Stash does the monitoring, surfaces the opportunities, and tells you exactly what to do next — so you're not leaving points on the table every month.",
     points: [
       "Know which card earns most for each purchase category",
       "Get alerted before points expire or perks lapse",
@@ -23,7 +23,7 @@ const profiles = [
     tag: "Older Australians",
     age: "Ages 60+",
     headline: "Your points are worth more than you think.",
-    body: "You've been earning Qantas or Velocity points for years. But it's hard to know what they're worth, which ones are about to expire, or what you can even do with them. Savvy makes it simple: clear balances, plain English, no complexity. We watch your accounts and tell you when something needs attention.",
+    body: "You've been earning Qantas or Velocity points for years. But it's hard to know what they're worth, which ones are about to expire, or what you can even do with them. Stash makes it simple: clear balances, plain English, no complexity. We watch your accounts and tell you when something needs attention.",
     points: [
       "See all your points balances in one clear dashboard",
       "Get simple, plain-English alerts before expiry",
@@ -55,7 +55,7 @@ export function Audience() {
             Built for every kind of rewards holder.
           </h2>
           <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            Whether you're just starting to optimise or have years of points quietly sitting there — Savvy meets you where you are.
+            Whether you're just starting to optimise or have years of points quietly sitting there — Stash meets you where you are.
           </p>
         </motion.div>
 

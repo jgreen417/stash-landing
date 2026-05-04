@@ -1,4 +1,4 @@
-import { SavvyLogo } from "./Navbar";
+import { StashLogo } from "./Navbar";
 
 export function Footer() {
   const links = {
@@ -12,12 +12,12 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
           <div className="col-span-2">
-            <SavvyLogo />
+            <StashLogo />
             <p className="mt-4 text-sm text-foreground/55 leading-relaxed max-w-xs">
               A points and card companion for Australians. Track, optimise, and protect your rewards — automatically.
             </p>
             <p className="mt-4 text-xs text-foreground/35">
-              Savvy does not provide financial advice. We provide factual information about points and loyalty programs.
+              Stash does not provide financial advice. We provide factual information about points and loyalty programs.
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border">
           <p className="text-xs text-foreground/35">
-            2025 Savvy. All rights reserved. ABN 00 000 000 000.
+            © 2025 Stash. All rights reserved. ABN 00 000 000 000.
           </p>
           <p className="text-xs text-foreground/35">
             Sydney, Australia

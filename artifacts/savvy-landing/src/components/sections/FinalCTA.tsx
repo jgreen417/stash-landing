@@ -88,7 +88,7 @@ export function FinalCTA() {
               transition={{ delay: 0.3, duration: 0.55 }}
               className="text-white/65 text-lg mb-10 leading-relaxed"
             >
-              Join thousands of Australians getting early access to Savvy.
+              Join thousands of Australians getting early access to Stash.
               Know your best next move before value disappears.
             </motion.p>
 
@@ -140,7 +140,7 @@ export function FinalCTA() {
               transition={{ delay: 0.5, duration: 0.5 }}
               className="text-white/35 text-xs mt-6"
             >
-              No spam. Unsubscribe anytime. We'll email you when Savvy is ready.
+              No spam. Unsubscribe anytime. We'll email you when Stash is ready.
             </motion.p>
           </div>
         </motion.div>

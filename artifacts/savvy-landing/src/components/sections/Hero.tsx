@@ -29,7 +29,7 @@ const TIPS = [
     scene: "At Woolworths",
     eyebrow: "At the checkout",
     headline: "Always know your best card.",
-    body: "Savvy surfaces which card earns the most points before you tap — across groceries, dining, travel, and more.",
+    body: "Stash surfaces which card earns the most points before you tap — across groceries, dining, travel, and more.",
     logo: "AX",
     logoBg: "linear-gradient(135deg, #006FCF 0%, #0057a8 100%)",
     card: "Amex Gold",
@@ -41,7 +41,7 @@ const TIPS = [
     scene: "At Sydney Airport",
     eyebrow: "At the airport",
     headline: "Every perk, right on time.",
-    body: "Free lounge access, priority boarding, travel credits — Savvy reminds you of what you've earned before you board.",
+    body: "Free lounge access, priority boarding, travel credits — Stash reminds you of what you've earned before you board.",
     logo: "VA",
     logoBg: "linear-gradient(135deg, #E11D48 0%, #b0142f 100%)",
     card: "Velocity Flyer",
@@ -85,7 +85,7 @@ function WalletCardFace({ tip }: { tip: typeof TIPS[0] }) {
         <div style={{ display: "flex", alignItems: "center", gap: "5px", marginBottom: "10px" }}>
           <Sparkles size={9} style={{ color: "hsl(45,85%,65%)" }} />
           <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "hsl(45,85%,65%)" }}>
-            Savvy suggests
+            Stash suggests
           </span>
           <span style={{ marginLeft: "auto", fontSize: "9px", color: "rgba(255,255,255,0.36)", fontWeight: 500 }}>
             {tip.scene}
@@ -506,7 +506,7 @@ export function Hero() {
                 variants={fadeUp} initial="hidden" animate="show" custom={2}
                 style={{ fontSize: "17px", color: "hsl(200 15% 45%)", lineHeight: 1.65, marginBottom: "32px", maxWidth: "440px" }}
               >
-                Savvy is a rewards copilot for Australians — track balances, prevent expiry,
+                Stash is a rewards copilot for Australians — track balances, prevent expiry,
                 and know your best move at every moment.
               </motion.p>
             </motion.div>

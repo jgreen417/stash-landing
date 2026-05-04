@@ -7,14 +7,14 @@ const layers = [
     number: "01",
     icon: Zap,
     title: "AI guidance, instantly",
-    body: "Ask Savvy anything about your cards, points, or perks. Get clear, factual answers in plain English — no jargon, no advice disclaimers, just the right information when you need it.",
+    body: "Ask Stash anything about your cards, points, or perks. Get clear, factual answers in plain English — no jargon, no advice disclaimers, just the right information when you need it.",
     detail: "Proactive alerts when something needs your attention.",
   },
   {
     number: "02",
     icon: LayoutDashboard,
     title: "Your rewards, unified",
-    body: "One dashboard for every card, loyalty account, and perk you hold. Savvy connects the dots so you can see your full rewards picture in seconds — not hours.",
+    body: "One dashboard for every card, loyalty account, and perk you hold. Stash connects the dots so you can see your full rewards picture in seconds — not hours.",
     detail: "Tracks Qantas, Velocity, Amex, Hilton, IHG, and more.",
   },
   {
@@ -47,13 +47,13 @@ export function Solution() {
           className="text-center mb-16"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 block">
-            How Savvy works
+            How Stash works
           </span>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             Your rewards copilot.<br />Three layers deep.
           </h2>
           <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            Most apps show you data. Savvy tells you what to do with it — and backs it up when things get complex.
+            Most apps show you data. Stash tells you what to do with it — and backs it up when things get complex.
           </p>
         </motion.div>
 
