@@ -18,7 +18,7 @@ export default function Home() {
         <Problem />
         <Solution />
         <TrustSecurity />
-        <Pricing />
+        {/* <Pricing /> */}
         <FinalCTA />
       </main>
       <Footer />

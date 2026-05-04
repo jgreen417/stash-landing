@@ -277,10 +277,10 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
 
 // ─── Scene copy (left side) ────────────────────────────────────────────────────
 
-function SceneCopy({ sceneIdx, onSelectScene }: { sceneIdx: number; onSelectScene?: (idx: number) => void }) {
+function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; onSelectScene?: (idx: number) => void; isMobile?: boolean }) {
   // Swipe gesture — works regardless of which scene is active
   const handleDragEnd = (_: any, info: { offset: { x: number } }) => {
-    if (!onSelectScene) return;
+    if (!onSelectScene || isMobile) return;
     const current = sceneIdx < 0 ? -1 : sceneIdx;
     if (info.offset.x < -30 && current < TIPS.length - 1) {
       onSelectScene(current + 1);
@@ -293,15 +293,15 @@ function SceneCopy({ sceneIdx, onSelectScene }: { sceneIdx: number; onSelectScen
 
   return (
     <motion.div
-      drag={onSelectScene ? "x" : false}
+      drag={onSelectScene && !isMobile ? "x" : false}
       dragConstraints={{ left: -80, right: 80 }}
       dragElastic={0.08}
       dragSnapToOrigin={true}
       onDragEnd={handleDragEnd}
-      style={{ touchAction: "pan-y", minHeight: "100px", overflow: "hidden" }}
+      style={{ touchAction: "pan-y", minHeight: isMobile ? "50px" : "100px", overflow: "hidden" }}
     >
       {/* Scene dots — always visible for discoverability */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: sceneIdx >= 0 ? "10px" : "14px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: isMobile ? "center" : undefined, gap: "10px", marginBottom: sceneIdx >= 0 ? "10px" : "14px" }}>
         <div style={{ display: "flex", gap: "5px" }}>
           {TIPS.map((_, i) => (
             <div
@@ -317,12 +317,12 @@ function SceneCopy({ sceneIdx, onSelectScene }: { sceneIdx: number; onSelectScen
             />
           ))}
         </div>
-        {sceneIdx >= 0 && (
+        {sceneIdx >= 0 && !isMobile && (
           <span style={{ fontSize: "12px", fontWeight: 600, color: "hsl(190,70%,28%)", letterSpacing: "0.02em" }}>
             {TIPS[sceneIdx].eyebrow}
           </span>
         )}
-        {sceneIdx < 0 && (
+        {sceneIdx < 0 && !isMobile && (
           <span style={{ fontSize: "11px", color: "hsl(200 15% 55%)", fontWeight: 500 }}>
             Swipe or tap to explore
           </span>
@@ -337,13 +337,44 @@ function SceneCopy({ sceneIdx, onSelectScene }: { sceneIdx: number; onSelectScen
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            style={{ display: "flex", alignItems: "center", gap: isMobile ? "8px" : "0" }}
           >
-            <p style={{ fontSize: "20px", fontWeight: 700, color: "hsl(200 40% 12%)", lineHeight: 1.25, marginBottom: "10px" }}>
-              {TIPS[sceneIdx].headline}
-            </p>
-            <p style={{ fontSize: "15px", color: "hsl(200 15% 45%)", lineHeight: 1.65, maxWidth: "400px" }}>
-              {TIPS[sceneIdx].body}
-            </p>
+            {isMobile && (
+              <button
+                onClick={() => onSelectScene?.(sceneIdx > 0 ? sceneIdx - 1 : TIPS.length - 1)}
+                aria-label="Previous tip"
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  padding: "8px 6px", color: "hsl(190 70% 25% / 0.4)",
+                  fontSize: "18px", lineHeight: 1, flexShrink: 0,
+                  marginTop: "2px",
+                }}
+              >
+                {"<"}
+              </button>
+            )}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <p style={{ fontSize: "20px", fontWeight: 700, color: "hsl(200 40% 12%)", lineHeight: 1.25, marginBottom: "10px" }}>
+                {TIPS[sceneIdx].headline}
+              </p>
+              <p style={{ fontSize: "15px", color: "hsl(200 15% 45%)", lineHeight: 1.65, maxWidth: isMobile ? "280px" : "400px" }}>
+                {TIPS[sceneIdx].body}
+              </p>
+            </div>
+            {isMobile && (
+              <button
+                onClick={() => onSelectScene?.(sceneIdx < TIPS.length - 1 ? sceneIdx + 1 : 0)}
+                aria-label="Next tip"
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  padding: "8px 6px", color: "hsl(190 70% 25% / 0.4)",
+                  fontSize: "18px", lineHeight: 1, flexShrink: 0,
+                  marginTop: "2px",
+                }}
+              >
+                {">"}
+              </button>
+            )}
           </motion.div>
         ) : (
           <motion.div
@@ -400,6 +431,16 @@ export function Hero() {
 
   const [tipIndex, setTipIndex] = useState(-1);
   const [sceneIdx, setSceneIdx] = useState(-1);
+
+  // Auto-advance carousel on mobile
+  useEffect(() => {
+    if (!isMobile) return;
+    const interval = setInterval(() => {
+      setSceneIdx((prev) => (prev + 1) % TIPS.length);
+      setTipIndex((prev) => (prev + 1) % TIPS.length);
+    }, 15000);
+    return () => clearInterval(interval);
+  }, [isMobile]);
 
   // ── Spring configs (different inertia for depth layers) ──
   const SPRING_HEAVY = { stiffness: 55,  damping: 26, restDelta: 0.001 }; // phone — most lag
@@ -532,6 +573,7 @@ export function Hero() {
                 style={{ marginBottom: "36px" }}
               >
                 <a
+                  id="hero-cta"
                   href="#cta"
                   style={{
                     display: "inline-flex", alignItems: "center", gap: "8px",
@@ -546,61 +588,65 @@ export function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Scene copy — desktop only */}
-            {!isMobile && (
-              <motion.div style={{ y: isMobile ? 0 : sceneY }}>
-                <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}>
-                  <SceneCopy sceneIdx={sceneIdx} onSelectScene={(i) => { setSceneIdx(i); setTipIndex(i); }} />
-                </motion.div>
+            {/* Scene copy */}
+            <motion.div style={{ y: isMobile ? 0 : sceneY }}>
+              <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}>
+                <SceneCopy sceneIdx={sceneIdx} onSelectScene={(i) => { setSceneIdx(i); setTipIndex(i); }} isMobile={isMobile} />
               </motion.div>
-            )}
+            </motion.div>
 
             {/* Mobile product preview — wallet card faces */}
             {isMobile && (
               <motion.div
                 variants={fadeUp} initial="hidden" animate="show" custom={5}
-                style={{ marginTop: "20px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}
+                style={{ marginTop: "20px" }}
               >
-                {TIPS.map((tip) => (
-                  <div
-                    key={tip.scene}
-                    style={{
-                      padding: "10px 12px", borderRadius: "12px",
-                      background: "white", border: "1px solid hsl(40 20% 90%)",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                      <div
-                        style={{
-                          width: "28px", height: "20px", borderRadius: "5px",
-                          background: tip.logoBg, display: "flex", alignItems: "center",
-                          justifyContent: "center", color: "white", fontSize: "10px",
-                          fontWeight: 800, flexShrink: 0,
-                        }}
-                      >
-                        {tip.logo}
+                <AnimatePresence mode="wait">
+                  {sceneIdx >= 0 && (
+                    <motion.div
+                      key={sceneIdx}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      style={{
+                        padding: "10px 12px", borderRadius: "12px",
+                        background: "white", border: "1px solid hsl(40 20% 90%)",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <div
+                          style={{
+                            width: "28px", height: "20px", borderRadius: "5px",
+                            background: TIPS[sceneIdx].logoBg, display: "flex", alignItems: "center",
+                            justifyContent: "center", color: "white", fontSize: "10px",
+                            fontWeight: 800, flexShrink: 0,
+                          }}
+                        >
+                          {TIPS[sceneIdx].logo}
+                        </div>
+                        <span style={{ fontSize: "11px", fontWeight: 600, color: "hsl(200 40% 15%)", lineHeight: 1.2 }}>
+                          {TIPS[sceneIdx].card}
+                        </span>
                       </div>
-                      <span style={{ fontSize: "11px", fontWeight: 600, color: "hsl(200 40% 15%)", lineHeight: 1.2 }}>
-                        {tip.card}
-                      </span>
-                    </div>
-                    <div style={{ marginTop: "6px", display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span style={{ fontSize: "11px", color: "hsl(200 15% 55%)", flex: 1 }}>
-                        {tip.earn}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "11px", fontWeight: 700, color: "white",
-                          padding: "2px 7px", borderRadius: "6px",
-                          background: tip.valueBg, whiteSpace: "nowrap",
-                        }}
-                      >
-                        {tip.value}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                      <div style={{ marginTop: "6px", display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span style={{ fontSize: "11px", color: "hsl(200 15% 55%)", flex: 1 }}>
+                          {TIPS[sceneIdx].earn}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "11px", fontWeight: 700, color: "white",
+                            padding: "2px 7px", borderRadius: "6px",
+                            background: TIPS[sceneIdx].valueBg, whiteSpace: "nowrap",
+                          }}
+                        >
+                          {TIPS[sceneIdx].value}
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             )}
           </div>
@@ -661,7 +707,7 @@ export function Hero() {
         </div>
 
         {/* ── Scroll hint ── */}
-        {!prefersReducedMotion && (
+        {!prefersReducedMotion && !isMobile && (
         <motion.div
           style={{
             position: "absolute", bottom: "28px", left: "50%",

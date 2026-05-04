@@ -1,15 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileCtaVisible, setMobileCtaVisible] = useState(false);
   const [open, setOpen] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const el = document.getElementById("hero-cta");
+    if (!el) return;
+
+    observerRef.current = new IntersectionObserver(
+      ([entry]) => {
+        setMobileCtaVisible(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: "-64px 0px 0px 0px" }
+    );
+    observerRef.current.observe(el);
+
+    return () => observerRef.current?.disconnect();
   }, []);
 
   const links = [
@@ -42,6 +59,7 @@ export function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           gap: "32px",
+          position: "relative",
         }}
       >
         <a href="#" style={{ textDecoration: "none", flexShrink: 0 }}>
@@ -73,7 +91,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div style={{ flexShrink: 0 }} className="hidden md:block">
+        <div className="hidden md:block" style={{ flexShrink: 0 }}>
           <a
             href="#cta"
             style={{
@@ -87,8 +105,10 @@ export function Navbar() {
               fontSize: "14px",
               fontWeight: 600,
               textDecoration: "none",
-              transition: "opacity 0.15s",
               whiteSpace: "nowrap",
+              transition: "opacity 0.25s",
+              opacity: mobileCtaVisible ? 1 : 0,
+              pointerEvents: mobileCtaVisible ? "auto" : "none" as any,
             }}
           >
             Join waitlist
@@ -161,6 +181,50 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile bottom CTA bar — slides up when hero CTA scrolls past */}
+      <motion.div
+        className="md:hidden"
+        initial={{ y: 80, opacity: 0 }}
+        animate={{
+          y: mobileCtaVisible ? 0 : 80,
+          opacity: mobileCtaVisible ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 40,
+          padding: "12px 24px",
+          paddingBottom: "calc(12px + env(safe-area-inset-bottom, 0px))",
+          background: "linear-gradient(to top, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.92) 60%, transparent 100%)",
+          pointerEvents: mobileCtaVisible ? "auto" : "none" as any,
+        }}
+      >
+        <a
+          href="#cta"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            width: "100%",
+            padding: "14px 24px",
+            borderRadius: "999px",
+            background: "hsl(190,70%,25%)",
+            color: "white",
+            fontSize: "15px",
+            fontWeight: 600,
+            textDecoration: "none",
+            boxShadow: "0 4px 20px hsl(190 70% 25% / 0.32)",
+          }}
+        >
+          Join the waitlist
+          <ArrowRight size={16} />
+        </a>
+      </motion.div>
     </motion.header>
   );
 }
