@@ -3,6 +3,7 @@ import { TrustBar } from "@/components/sections/TrustBar";
 import { Problem } from "@/components/sections/Problem";
 import { Solution } from "@/components/sections/Solution";
 import { TrustSecurity } from "@/components/sections/TrustSecurity";
+import { Differentiators } from "@/components/sections/Differentiators";
 import { Pricing } from "@/components/sections/Pricing";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Navbar } from "@/components/sections/Navbar";
@@ -14,10 +15,11 @@ export default function Home() {
       <Navbar />
       <main className="flex-1" style={{ position: "relative" }}>
         <Hero />
-        <TrustBar />
         <Problem />
+        <TrustBar />
         <Solution />
         <TrustSecurity />
+        <Differentiators />
         {/* <Pricing /> */}
         <FinalCTA />
       </main>

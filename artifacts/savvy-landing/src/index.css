@@ -93,7 +93,7 @@
   --secondary: 45 80% 50%;
   --secondary-foreground: 200 40% 15%;
   --muted: 40 20% 92%;
-  --muted-foreground: 200 15% 45%;
+  --muted-foreground: 30 8% 45%;
   --accent: 40 20% 92%;
   --accent-foreground: 200 40% 15%;
   --destructive: 0 84% 60%;
@@ -110,6 +110,15 @@
   --app-font-serif: Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: .5rem;
+
+  /* ── Proportional system ──
+   * Base unit (U) = 24px (px-6, p-6 default)
+   * Phone mockup width     = 288px = 12U
+   * Navbar max-width       = 1152px = 48U
+   * Card border-radius     = 16px (0.67U) — intentional contrast to 24px padding
+   * Hero gap (desktop)     = 56px (2.33U) — asymmetric, wider for breathing room
+   * Section py (desktop)   = 96px (4U)
+   */
 }
 
 @layer base {

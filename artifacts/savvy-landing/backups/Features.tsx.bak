@@ -82,11 +82,6 @@ export function Features() {
             const Icon = feature.icon;
             /* Alternate slide: even = left, odd = right */
             const xFrom = i % 2 === 0 ? -32 : 32;
-            const isFirst = i === 0;
-            const showBadge = i <= 1;
-            /* Pair connector: every even-index card gets a subtle bottom border extension */
-            const isEvenPair = i % 2 === 0 && i > 0;
-
             return (
               <motion.div
                 key={feature.title}
@@ -102,15 +97,10 @@ export function Features() {
                   boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
                   transition: { type: "spring", stiffness: 280, damping: 18 },
                 }}
-                className={`p-6 rounded-2xl border border-border bg-white hover:border-primary/25 transition-colors cursor-default relative ${
-                  isEvenPair ? "before:absolute before:left-0 before:top-0 before:w-full before:h-px before:bg-border/60 before:-translate-y-3" : ""
-                }`}
-                style={{
-                  borderLeft: isFirst ? "3px solid hsl(190,70%,25%)" : undefined,
-                }}
+                className="group p-6 rounded-2xl border border-border bg-white hover:border-primary/25 transition-colors cursor-default"
               >
                 <div className="flex items-start gap-5">
-                  {/* Icon */}
+                  {/* Icon spins and scales in */}
                   <motion.div
                     initial={{ scale: 0.3, rotate: -18, opacity: 0 }}
                     animate={inView ? { scale: 1, rotate: 0, opacity: 1 } : {}}
@@ -120,36 +110,27 @@ export function Features() {
                       stiffness: 250,
                       damping: 16,
                     }}
-                    className={`rounded-xl flex items-center justify-center shrink-0 ${
-                      isFirst ? "w-12 h-12" : "w-10 h-10"
-                    }`}
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: "hsl(190 70% 25% / 0.08)" }}
                   >
-                    <Icon size={isFirst ? 22 : 20} style={{ color: "hsl(190,70%,25%)" }} />
+                    <Icon size={20} style={{ color: "hsl(190,70%,25%)" }} />
                   </motion.div>
 
-                  <div className="min-w-0">
+                  <div>
                     <h3 className="text-base font-semibold text-foreground mb-2">{feature.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-3">{feature.body}</p>
-                    {showBadge && (
-                      <motion.span
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={inView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ delay: i * 0.08 + 0.3, duration: 0.4 }}
-                        className="text-xs font-semibold px-3 py-1 rounded-full inline-block"
-                        style={{
-                          background: "hsl(45 80% 50% / 0.12)",
-                          color: "hsl(35,70%,35%)",
-                        }}
-                      >
-                        {feature.highlight}
-                      </motion.span>
-                    )}
-                    {!showBadge && (
-                      <span className="text-xs font-medium" style={{ color: "hsl(190 70% 25% / 0.5)" }}>
-                        {feature.highlight}
-                      </span>
-                    )}
+                    <motion.span
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={inView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: i * 0.08 + 0.3, duration: 0.4 }}
+                      className="text-xs font-semibold px-3 py-1 rounded-full inline-block"
+                      style={{
+                        background: "hsl(45 80% 50% / 0.12)",
+                        color: "hsl(35,70%,35%)",
+                      }}
+                    >
+                      {feature.highlight}
+                    </motion.span>
                   </div>
                 </div>
               </motion.div>

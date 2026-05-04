@@ -54,7 +54,7 @@ export function TrustSecurity() {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             Security is part of the product.
           </h2>
-          <p className="text-lg text-foreground/60 max-w-xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             You're sharing sensitive data. We don't take that lightly. Here's exactly how we handle it.
           </p>
         </motion.div>
@@ -89,7 +89,7 @@ export function TrustSecurity() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
           {pillars.map((pillar, i) => {
             const Icon = pillar.icon;
             const xDir = i % 2 === 0 ? -20 : 20;
@@ -105,8 +105,9 @@ export function TrustSecurity() {
                   damping: 22,
                 }}
                 whileHover={{ y: -3, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                className="p-4 md:p-5 rounded-xl md:rounded-2xl bg-white border border-border hover:border-primary/20 hover:shadow-md transition-shadow cursor-default"
+                className="w-[calc(50%-6px)] md:w-[calc(50%-8px)] lg:w-[calc(33.333%-10.667px)] p-4 md:p-5 rounded-xl md:rounded-2xl bg-white border border-border hover:border-primary/20 hover:shadow-md transition-shadow cursor-default"
               >
+                {/* width calc: matches gap-3 / md:gap-4 / lg:gap-4 — change together */}
                 <motion.div
                   initial={{ scale: 0.4, rotate: -12, opacity: 0 }}
                   animate={inView ? { scale: 1, rotate: 0, opacity: 1 } : {}}
@@ -122,7 +123,7 @@ export function TrustSecurity() {
                   <Icon size={14} className="md:w-[17px] md:h-[17px]" style={{ color: "hsl(190,70%,25%)" }} />
                 </motion.div>
                 <h3 className="font-semibold text-xs md:text-sm text-foreground mb-1.5 md:mb-2">{pillar.title}</h3>
-                <p className="text-xs md:text-sm text-foreground/55 leading-relaxed">{pillar.body}</p>
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{pillar.body}</p>
               </motion.div>
             );
           })}

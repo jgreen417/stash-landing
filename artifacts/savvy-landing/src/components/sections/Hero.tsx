@@ -80,7 +80,7 @@ function WalletCardFace({ tip }: { tip: typeof TIPS[0] }) {
   return (
     <div
       style={{
-        borderRadius: "20px",
+        borderRadius: "16px",
         overflow: "hidden",
         boxShadow: "0 8px 32px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.08)",
       }}
@@ -186,7 +186,7 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
         {/* Status bar */}
         <div style={{ padding: "14px 20px 8px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
           <span style={{ fontSize: "11px", fontWeight: 700, color: "hsl(200 40% 15%)" }}>9:41</span>
-          <div style={{ width: "78px", height: "24px", borderRadius: "20px", background: "#0f0f1a", position: "absolute", left: "50%", transform: "translateX(-50%)", top: "10px" }} />
+          <div style={{ width: "78px", height: "24px", borderRadius: "16px", background: "#0f0f1a", position: "absolute", left: "50%", transform: "translateX(-50%)", top: "10px" }} />
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <Wifi size={11} style={{ color: "hsl(200 40% 20%)" }} />
             <Battery size={11} style={{ color: "hsl(200 40% 20%)" }} />
@@ -196,7 +196,7 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
         {/* App header */}
         <div style={{ padding: "4px 20px 12px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
           <div>
-            <p style={{ fontSize: "10px", color: "hsl(200 15% 55%)", fontWeight: 500 }}>Good morning, Sarah</p>
+            <p style={{ fontSize: "10px", color: "hsl(30 8% 55%)", fontWeight: 500 }}>Good morning, Sarah</p>
             <p style={{ fontSize: "16px", fontWeight: 700, color: "hsl(200 40% 15%)", marginTop: "1px" }}>Your rewards</p>
           </div>
           <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "hsl(190 70% 25% / 0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -206,7 +206,7 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
 
         {/* Content */}
         <div style={{ flex: 1, overflowY: "hidden", padding: "0 14px 8px" }}>
-          <div style={{ borderRadius: "20px", background: "linear-gradient(135deg, hsl(190,70%,25%) 0%, hsl(200,60%,18%) 100%)", padding: "16px", marginBottom: "11px", position: "relative", overflow: "hidden" }}>
+            <div style={{ borderRadius: "16px", background: "linear-gradient(135deg, hsl(190,70%,25%) 0%, hsl(200,60%,18%) 100%)", padding: "16px", marginBottom: "11px", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", top: "-20px", right: "-20px", width: "100px", height: "100px", borderRadius: "50%", background: "rgba(255,255,255,0.05)" }} />
             <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.6)", fontWeight: 500, marginBottom: "5px" }}>Total rewards value</p>
             <p style={{ fontSize: "26px", fontWeight: 800, color: "white", lineHeight: 1, marginBottom: "3px" }}>$2,840</p>
@@ -225,7 +225,7 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
             </div>
           </div>
 
-          <p style={{ fontSize: "10px", fontWeight: 700, color: "hsl(200 15% 50%)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "7px" }}>Programs</p>
+          <p style={{ fontSize: "10px", fontWeight: 700, color: "hsl(30 8% 50%)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "7px" }}>Programs</p>
           {[
             { name: "Qantas Frequent Flyer", pts: "18,400 pts", logo: "QF", bg: "#E4002B" },
             { name: "Velocity Frequent Flyer", pts: "42,100 pts", logo: "VA", bg: "#E11D48" },
@@ -238,7 +238,7 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{ fontSize: "11px", fontWeight: 600, color: "hsl(200 40% 15%)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{card.name}</p>
-                <p style={{ fontSize: "10px", color: "hsl(200 15% 55%)" }}>{card.pts}</p>
+                <p style={{ fontSize: "10px", color: "hsl(30 8% 55%)" }}>{card.pts}</p>
               </div>
             </div>
           ))}
@@ -278,26 +278,8 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
 // ─── Scene copy (left side) ────────────────────────────────────────────────────
 
 function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; onSelectScene?: (idx: number) => void; isMobile?: boolean }) {
-  // Swipe gesture — works regardless of which scene is active
-  const handleDragEnd = (_: any, info: { offset: { x: number } }) => {
-    if (!onSelectScene || isMobile) return;
-    const current = sceneIdx < 0 ? -1 : sceneIdx;
-    if (info.offset.x < -30 && current < TIPS.length - 1) {
-      onSelectScene(current + 1);
-    } else if (info.offset.x > 30 && current > 0) {
-      onSelectScene(current - 1);
-    } else if (info.offset.x < -30 && current === -1) {
-      onSelectScene(0);
-    }
-  };
-
   return (
-    <motion.div
-      drag={onSelectScene && !isMobile ? "x" : false}
-      dragConstraints={{ left: -80, right: 80 }}
-      dragElastic={0.08}
-      dragSnapToOrigin={true}
-      onDragEnd={handleDragEnd}
+    <div
       style={{ touchAction: "pan-y", minHeight: isMobile ? "50px" : "100px", overflow: "hidden" }}
     >
       {/* Scene dots — always visible for discoverability */}
@@ -320,11 +302,6 @@ function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; on
         {sceneIdx >= 0 && !isMobile && (
           <span style={{ fontSize: "12px", fontWeight: 600, color: "hsl(190,70%,28%)", letterSpacing: "0.02em" }}>
             {TIPS[sceneIdx].eyebrow}
-          </span>
-        )}
-        {sceneIdx < 0 && !isMobile && (
-          <span style={{ fontSize: "11px", color: "hsl(200 15% 55%)", fontWeight: 500 }}>
-            Swipe or tap to explore
           </span>
         )}
       </div>
@@ -357,7 +334,7 @@ function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; on
               <p style={{ fontSize: "20px", fontWeight: 700, color: "hsl(200 40% 12%)", lineHeight: 1.25, marginBottom: "10px" }}>
                 {TIPS[sceneIdx].headline}
               </p>
-              <p style={{ fontSize: "15px", color: "hsl(200 15% 45%)", lineHeight: 1.65, maxWidth: isMobile ? "280px" : "400px" }}>
+              <p style={{ fontSize: "15px", color: "hsl(30 8% 45%)", lineHeight: 1.65, maxWidth: isMobile ? "280px" : "400px" }}>
                 {TIPS[sceneIdx].body}
               </p>
             </div>
@@ -388,7 +365,7 @@ function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; on
               { icon: TrendingUp, text: "37B points went unredeemed last year" },
               { icon: CreditCard, text: "\$292 in forgotten points per person" },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} style={{ display: "flex", alignItems: "center", gap: "8px", color: "hsl(200 15% 50%)", fontSize: "13px" }}>
+              <div key={text} style={{ display: "flex", alignItems: "center", gap: "8px", color: "hsl(30 8% 50%)", fontSize: "13px" }}>
                 <Icon size={14} style={{ color: "hsl(190,70%,25%)", flexShrink: 0 }} />
                 {text}
               </div>
@@ -396,7 +373,7 @@ function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; on
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
@@ -528,7 +505,7 @@ export function Hero() {
                   display: "inline-flex", alignItems: "center", gap: "8px",
                   padding: "6px 14px", borderRadius: "999px",
                   border: "1px solid hsl(40 20% 88%)", background: "rgba(255,255,255,0.88)",
-                  fontSize: "13px", fontWeight: 500, color: "hsl(200 15% 45%)",
+                  fontSize: "13px", fontWeight: 500, color: "hsl(30 8% 45%)",
                   marginBottom: "24px", boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                 }}
               >
@@ -560,7 +537,7 @@ export function Hero() {
             <motion.div style={{ y: isMobile ? 0 : subtextY }}>
               <motion.p
                 variants={fadeUp} initial="hidden" animate="show" custom={2}
-                style={{ fontSize: "17px", color: "hsl(200 15% 45%)", lineHeight: 1.65, marginBottom: "32px", maxWidth: "440px" }}
+                style={{ fontSize: "17px", color: "hsl(30 8% 45%)", lineHeight: 1.65, marginBottom: "32px", maxWidth: "440px" }}
               >
                 Your rewards copilot. Stash tracks points, vouchers, cashback, and offers — then tells you the next best action, every time.
               </motion.p>
@@ -580,7 +557,7 @@ export function Hero() {
                     padding: "15px 32px", borderRadius: "999px",
                     background: "hsl(190,70%,25%)", color: "white",
                     fontSize: "16px", fontWeight: 600, textDecoration: "none",
-                    boxShadow: "0 4px 20px hsl(190 70% 25% / 0.32)",
+                    boxShadow: "0 4px 20px hsl(190 70% 25% / 0.32), 0 0 0 1px hsla(45,80%,50%,0.06)",
                   }}
                 >
                   Join the waitlist <ArrowRight size={16} />
@@ -631,7 +608,7 @@ export function Hero() {
                         </span>
                       </div>
                       <div style={{ marginTop: "6px", display: "flex", alignItems: "center", gap: "6px" }}>
-                        <span style={{ fontSize: "11px", color: "hsl(200 15% 55%)", flex: 1 }}>
+                        <span style={{ fontSize: "11px", color: "hsl(30 8% 55%)", flex: 1 }}>
                           {TIPS[sceneIdx].earn}
                         </span>
                         <span
@@ -717,14 +694,14 @@ export function Hero() {
             alignItems: "center", gap: "6px", pointerEvents: "none",
           }}
         >
-          <span style={{ fontSize: "10px", color: "hsl(200 15% 60%)", fontWeight: 600, letterSpacing: "0.1em" }}>
+          <span style={{ fontSize: "10px", color: "hsl(30 8% 55%)", fontWeight: 600, letterSpacing: "0.1em" }}>
             SCROLL TO EXPLORE
           </span>
           <motion.div
             animate={{ y: [0, 5, 0] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
           >
-            <MousePointer2 size={13} style={{ color: "hsl(200 15% 60%)" }} />
+            <MousePointer2 size={13} style={{ color: "hsl(30 8% 55%)" }} />
           </motion.div>
         </motion.div>
         )}

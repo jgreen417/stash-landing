@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, CheckCircle, Loader2, Mail } from "lucide-react";
 import { supabase } from "../../lib/supabase";
@@ -9,10 +9,33 @@ export function FinalCTA() {
   const [step, setStep] = useState<"email" | "name" | "done">("email");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [referralSource, setReferralSource] = useState<string | null>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const ref = useRef<HTMLElement>(null);
   const innerRef = useRef(null);
   const inView = useInView(innerRef, { once: true, margin: "-80px" });
+
+  // Check for referral source from seller CTA
+  useEffect(() => {
+    const checkSource = () => {
+      const source = sessionStorage.getItem("stash_referral");
+      if (source) {
+        setReferralSource(source);
+        sessionStorage.removeItem("stash_referral");
+      }
+    };
+    // Check on mount (page load / refresh)
+    checkSource();
+    // Listen for custom event from seller CTA
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail) {
+        setReferralSource(detail);
+      }
+    };
+    window.addEventListener("stash-referral", handler);
+    return () => window.removeEventListener("stash-referral", handler);
+  }, []);
 
   /* Subtle parallax scale on the card as it scrolls into view */
   const { scrollYProgress } = useScroll({
@@ -43,9 +66,11 @@ export function FinalCTA() {
 
     setLoading(true);
     setError(null);
+    const payload: Record<string, string> = { email: email.trim().toLowerCase(), name: name.trim() };
+    if (referralSource) payload.referral_source = referralSource;
     const { error: err } = await supabase
       .from("waitlist")
-      .insert({ email: email.trim().toLowerCase(), name: name.trim() });
+      .insert(payload);
     setLoading(false);
     if (err) {
       if (err.code === "23505") {
@@ -106,7 +131,7 @@ export function FinalCTA() {
               className="inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-6"
               style={{ background: "hsl(45 80% 50% / 0.25)", color: "hsl(45,80%,70%)" }}
             >
-              Private waitlist open
+              {referralSource === "SELLER" ? "Seller access" : "Private waitlist open"}
             </motion.span>
 
             <motion.h2
@@ -115,7 +140,11 @@ export function FinalCTA() {
               transition={{ delay: 0.22, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight"
             >
-              Your rewards,<br />finally working for you.
+              {referralSource === "SELLER" ? (
+                "Interested in Stash for your brand?"
+              ) : (
+                <>Your rewards,<br />finally working for you.</>
+              )}
             </motion.h2>
 
             <motion.p
@@ -124,7 +153,9 @@ export function FinalCTA() {
               transition={{ delay: 0.3, duration: 0.55 }}
               className="text-white/65 text-lg mb-10 leading-relaxed"
             >
-              Get early access to Stash. Every point, voucher, cashback, and offer working together — finally.
+              {referralSource === "SELLER"
+                ? "Leave your details and we'll reach out to learn about your program and how Stash can help."
+                : "Get early access to Stash. Every point, voucher, cashback, and offer working together — finally."}
             </motion.p>
 
             <motion.div
@@ -164,6 +195,38 @@ export function FinalCTA() {
                       <ArrowRight size={15} />
                     </motion.button>
                   </motion.form>
+                )}
+
+                {referralSource === "SELLER" && step === "email" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.35 }}
+                    className="text-center mt-4"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setReferralSource(null);
+                        sessionStorage.removeItem("stash_referral");
+                      }}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "rgba(255,255,255,0.5)",
+                        fontSize: "13px",
+                        fontWeight: 500,
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        textUnderlineOffset: "3px",
+                        transition: "color 0.2s",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.85)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+                    >
+                      Not a seller?
+                    </button>
+                  </motion.div>
                 )}
 
                 {step === "name" && (

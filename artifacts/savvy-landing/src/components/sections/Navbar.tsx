@@ -32,7 +32,7 @@ export function Navbar() {
   const links = [
     { label: "How it works", href: "#solution" },
     { label: "Trust & security", href: "#trust" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "For sellers", href: "#for-sellers" },
   ];
 
   return (
@@ -116,7 +116,7 @@ export function Navbar() {
         </div>
 
         <button
-          className="md:hidden"
+          className="md:hidden flex items-center justify-center"
           onClick={() => setOpen(!open)}
           style={{
             padding: "12px",
@@ -126,9 +126,6 @@ export function Navbar() {
             cursor: "pointer",
             minWidth: "44px",
             minHeight: "44px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
           aria-label="Toggle menu"
         >
@@ -218,7 +215,7 @@ export function Navbar() {
             fontSize: "15px",
             fontWeight: 600,
             textDecoration: "none",
-            boxShadow: "0 4px 20px hsl(190 70% 25% / 0.32)",
+            boxShadow: "0 4px 20px hsl(190 70% 25% / 0.32), 0 0 0 1px hsla(45,80%,50%,0.06)",
           }}
         >
           Join the waitlist

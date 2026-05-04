@@ -59,7 +59,7 @@ export function Problem() {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             Loyalty programs are designed to be confusing.
           </h2>
-          <p className="text-lg text-foreground/60 max-w-xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             Banks, airlines and hotels profit from points that go unredeemed.
             Australians have no unified view, no guidance, and points expiring silently.
           </p>
@@ -101,7 +101,7 @@ export function Problem() {
                 <h3 className="font-semibold text-base text-foreground mb-2">
                   {p.title}
                 </h3>
-                <p className="text-sm text-foreground/55 leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {p.body}
                 </p>
               </motion.div>
@@ -146,11 +146,11 @@ export function Problem() {
                   {stat.num}
                 </p>
                 <p className="text-sm font-semibold text-foreground/70 mt-1">{stat.label}</p>
-                <p className="text-xs text-foreground/55 mt-0.5">{stat.sub}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{stat.sub}</p>
               </motion.div>
             ))}
           </div>
-          <p className="text-center text-xs text-foreground/50 mt-4">
+          <p className="text-center text-xs text-muted-foreground/80 mt-4">
             Sources: Statista 2025, Qantas Annual Report 2024 (FY24), Money.com.au 2026, Transmit Security 2024
           </p>
         </motion.div>
