@@ -1,0 +1,50 @@
+STASH
+_
+Compact Solution Pitch
+Stash — Compact Solution Pitch
+Stash is a personalised AI shopping and loyalty optimisation platform that helps consumers achieve their shopping goals
+while helping sellers design better loyalty programs and reach the right customers.
+Today, consumers are surrounded by loyalty programs, vouchers, cashback offers, points, cards, and promotions, but most people do
+not know which ones are actually worth using. Existing solutions mostly store cards, show offers, or promote one retailer’s own
+program. Stash goes further: it learns each user’s goals, habits, budget, favourite stores, reward preferences, receipts, and spending
+behaviour, then tells them the best next action.
+For customers, Stash becomes a personal AI rewards agent. It helps them save money, earn better rewards, avoid fake deals,
+prevent expired points, detect missed value, and choose the right store, offer, loyalty card, payment card, and redemption moment.
+Instead of saying, “Here are your offers,” Stash says:
+“Shop here, activate this offer, use this card, ignore that deal, and redeem later.”
+The key customer value is simple:
+Stash makes every loyalty program work for the customer, not just the company.
+For sellers, Stash becomes an AI loyalty intelligence and customer-retention platform. It helps retailers, brands, banks, card
+issuers, and loyalty programs reach customers when their offers are genuinely relevant. Sellers get better exposure, better targeting,
+stronger conversion, lower wasted promotion spend, customer segment insights, competitor benchmarking, campaign performance
+data, and AI recommendations for improving their loyalty programs.
+The seller value is:
+Promote smarter, not louder.
+Stash matches offers with the customers most likely to value them, then gives sellers privacy-safe insights into what rewards actually
+drive acquisition, retention, and repeat purchase.
+Core product
+Stash has three main layers:
+1. Consumer AI layer
+A personal AI that understands each user’s shopping goals and recommends the smartest way to shop, save, earn, redeem, and avoid
+waste.
+2. Reward intelligence layer
+A system that calculates the real value of points, cashback, vouchers, discounts, cards, expiry dates, basket prices, and overspending
+risk.
+3. Seller intelligence layer
+A platform that helps sellers create better offers, target the right customers, improve loyalty design, and measure retention
+performance.
+Why Stash wins
+Stash is not just an aggregator. Aggregation is only the data layer. The real product is personalised decision intelligence.
+Card wallets store cards.
+Retailer apps promote one ecosystem.
+Cashback apps push affiliate offers.
+Bank apps only see payment data.
+Generic AI assistants lack loyalty-specific data and reward valuation.
+Stash combines:
+personal goals + spending behaviour + loyalty programs + offer rules + receipt data + reward valuation + seller insights +
+AI recommendations.
+Final pitch
+Stash is the AI decision layer for the loyalty economy. It helps consumers shop smarter and use every loyalty program
+efficiently, while helping sellers design better rewards, reach the right customers, and improve retention. Consumers get
+personalised shopping guidance; sellers get smarter promotion and loyalty intelligence. The result is a two-sided platform
+where loyalty becomes less fragmented, less wasteful, and more valuable for both sides.
