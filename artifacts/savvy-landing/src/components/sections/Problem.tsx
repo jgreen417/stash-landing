@@ -1,19 +1,13 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  Clock,
   SplitSquareHorizontal,
-  AlertTriangle,
-  Gift,
+  Clock,
+  DollarSign,
   Layers,
 } from "lucide-react";
 
 const problems = [
-  {
-    icon: Layers,
-    title: "Too many programs, not enough clarity",
-    body: "Qantas, Velocity, Amex, hotel chains, supermarket points — managing them all means juggling apps, websites, and half-forgotten logins.",
-  },
   {
     icon: SplitSquareHorizontal,
     title: "Wrong card for the wrong purchase",
@@ -25,14 +19,14 @@ const problems = [
     body: "Billions of loyalty points go unused every year in Australia. They disappear quietly, often without even a notification.",
   },
   {
-    icon: Gift,
-    title: "Perks sit unused until they vanish",
-    body: "Annual travel credits, dining allowances, lounge passes — premium card benefits that never get claimed because no one tracks them.",
+    icon: DollarSign,
+    title: "Overspending to chase points",
+    body: "38% of cardholders admit they justify extra purchases to chase rewards — spending an average $715 more per month than they otherwise would.",
   },
   {
-    icon: AlertTriangle,
-    title: "No single place to see the full picture",
-    body: "There's no dashboard, no alert system, no guide. Just scattered apps and the vague sense that you're probably missing out.",
+    icon: Layers,
+    title: "Too many programs, no unified view",
+    body: "Qantas, Velocity, Amex, hotel chains, supermarket points — managing them all means juggling separate apps, websites, and half-forgotten logins.",
   },
 ];
 
@@ -42,7 +36,7 @@ const iconVariant = {
     scale: 1,
     rotate: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 260, damping: 18 },
+    transition: { type: "spring" as const, stiffness: 260, damping: 18 },
   },
 };
 
@@ -51,57 +45,58 @@ export function Problem() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="problem" className="py-24 px-6">
+    <section id="problem" className="py-16 md:py-24 px-6">
       <div className="max-w-5xl mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 block">
             The problem
           </span>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Rewards are broken for most Australians.
+            Loyalty programs are designed to be confusing.
           </h2>
           <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            You earned the points. You pay the annual fees. But value keeps
-            slipping through the cracks.
+            Banks, airlines and hotels profit from points that go unredeemed.
+            Australians have no unified view, no guidance, and points expiring silently.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {problems.map((p, i) => {
             const Icon = p.icon;
-            /* Alternating slide direction: left column from left, right column from right */
-            const xDir = i % 2 === 0 ? -28 : 28;
             return (
               <motion.div
                 key={p.title}
-                initial={{ opacity: 0, x: xDir, y: 16 }}
-                animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{
-                  delay: i * 0.07,
-                  duration: 0.55,
+                  delay: i * 0.08,
+                  duration: 0.5,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 whileHover={{
                   y: -4,
                   transition: { type: "spring", stiffness: 300, damping: 20 },
                 }}
-                className={`p-6 rounded-2xl border border-border bg-white hover:shadow-lg hover:border-primary/20 transition-shadow cursor-default ${
-                  i === 4 ? "md:col-span-2 lg:col-span-1" : ""
-                }`}
+                className="p-6 rounded-2xl border hover:shadow-lg hover:border-primary/20 transition-colors cursor-default"
+                style={{
+                  background: "hsl(190 70% 25% / 0.04)",
+                  borderColor: "hsl(190 70% 25% / 0.1)",
+                }}
               >
                 <motion.div
                   variants={iconVariant}
                   initial="hidden"
                   animate={inView ? "show" : "hidden"}
-                  transition={{ delay: i * 0.07 + 0.12 }}
-                  className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center mb-4"
+                  transition={{ delay: i * 0.08 + 0.12 }}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  style={{ background: "white" }}
                 >
-                  <Icon size={18} className="text-foreground/60" />
+                  <Icon size={18} style={{ color: "hsl(190,70%,25%)" }} />
                 </motion.div>
                 <h3 className="font-semibold text-base text-foreground mb-2">
                   {p.title}
@@ -114,28 +109,49 @@ export function Problem() {
           })}
         </div>
 
-        {/* Animated stat line */}
+        {/* Stats strip */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.55, duration: 0.6 }}
-          className="mt-10 text-center"
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-12"
         >
-          {/* Rule line draws in */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={inView ? { scaleX: 1 } : {}}
-            transition={{ delay: 0.6, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             style={{
               height: "1px",
               background: "hsl(40 20% 88%)",
-              marginBottom: "16px",
+              marginBottom: "24px",
               transformOrigin: "left",
             }}
           />
-          <p className="text-sm text-foreground/40 italic">
-            The average Australian household has 3.2 loyalty program memberships
-            and captures less than 30% of potential value.
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {[
+              { num: "$1.98B", label: "Unredeemed points", sub: "across Australian programs" },
+              { num: "$3.33B", label: "Qantas liability", sub: "FY24 — points issued, never used" },
+              { num: "38%", label: "Overspend on points", sub: "spend $715/mo extra chasing rewards" },
+              { num: "89%", label: "Loyalty fraud surge", sub: "YoY increase — fastest-growing fraud type" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 12 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.6 + i * 0.06, duration: 0.4 }}
+                className="text-center p-4 rounded-xl"
+                style={{ background: "hsl(190 70% 25% / 0.08)" }}
+              >
+                <p className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight" style={{ color: "hsl(190,70%,25%)" }}>
+                  {stat.num}
+                </p>
+                <p className="text-sm font-semibold text-foreground/70 mt-1">{stat.label}</p>
+                <p className="text-xs text-foreground/55 mt-0.5">{stat.sub}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="text-center text-xs text-foreground/50 mt-4">
+            Sources: Statista 2025, Qantas Annual Report 2024 (FY24), Money.com.au 2026, Transmit Security 2024
           </p>
         </motion.div>
       </div>

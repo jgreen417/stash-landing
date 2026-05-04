@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { LayoutGrid, BellRing, Route, Flame, Plane } from "lucide-react";
+import { LayoutGrid, BellRing, Route, Flame, Plane, Gift, GitCompare, Target } from "lucide-react";
 
 const features = [
   {
@@ -33,6 +33,24 @@ const features = [
     body: "Working towards a trip? Stash helps you map the fastest path using points you already have — and flags gaps before you book.",
     highlight: "Points-first travel planning.",
   },
+  {
+    icon: Gift,
+    title: "Welcome bonus tracker",
+    body: "Never miss a sign-up bonus again. Stash tracks which cards you've opened, what you've earned, and when each bonus hits — so you always collect what you signed up for.",
+    highlight: "Every bonus, accounted for.",
+  },
+  {
+    icon: GitCompare,
+    title: "Card comparison tool",
+    body: "See Qantas vs Jetstar for your actual trip, using your actual points. Stash compares your redemption options side by side so you never guess which is best.",
+    highlight: "Real comparison, real points.",
+  },
+  {
+    icon: Target,
+    title: "Goal planner",
+    body: "Working towards a trip or reward? Stash reverse-engineers the cards and spend you need to hit your goal — and tracks progress along the way.",
+    highlight: "Your goal, mapped backward.",
+  },
 ];
 
 export function Features() {
@@ -52,10 +70,10 @@ export function Features() {
             Features
           </span>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Everything working in the background.
+            Core features, built for Australian rewards.
           </h2>
           <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            Stash runs quietly behind the scenes so you capture more value without the effort.
+            Every tool you need to track, optimise, and act on your points, cards, and perks.
           </p>
         </motion.div>
 
@@ -79,9 +97,7 @@ export function Features() {
                   boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
                   transition: { type: "spring", stiffness: 280, damping: 18 },
                 }}
-                className={`group p-7 rounded-2xl border border-border bg-white hover:border-primary/25 transition-colors cursor-default ${
-                  i === 4 ? "md:col-span-2" : ""
-                }`}
+                className="group p-6 rounded-2xl border border-border bg-white hover:border-primary/25 transition-colors cursor-default"
               >
                 <div className="flex items-start gap-5">
                   {/* Icon spins and scales in */}
@@ -94,7 +110,7 @@ export function Features() {
                       stiffness: 250,
                       damping: 16,
                     }}
-                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: "hsl(190 70% 25% / 0.08)" }}
                   >
                     <Icon size={20} style={{ color: "hsl(190,70%,25%)" }} />

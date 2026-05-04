@@ -14,18 +14,18 @@ export function Navbar() {
 
   const links = [
     { label: "How it works", href: "#solution" },
-    { label: "Features", href: "#features" },
-    { label: "Security", href: "#trust" },
+    { label: "Trust & security", href: "#trust" },
     { label: "Pricing", href: "#pricing" },
   ];
 
   return (
     <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
+        top: "env(safe-area-inset-top, 0px)",
         background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled ? "1px solid hsl(40 20% 90%)" : "none",
@@ -50,7 +50,7 @@ export function Navbar() {
 
         <div
           className="hidden md:flex"
-          style={{ display: "flex", alignItems: "center", gap: "32px", flex: 1, justifyContent: "center" }}
+          style={{ alignItems: "center", gap: "32px", flex: 1, justifyContent: "center" }}
         >
           {links.map((l) => (
             <a
@@ -99,11 +99,16 @@ export function Navbar() {
           className="md:hidden"
           onClick={() => setOpen(!open)}
           style={{
-            padding: "8px",
+            padding: "12px",
             color: "hsl(200 40% 15%)",
             background: "none",
             border: "none",
             cursor: "pointer",
+            minWidth: "44px",
+            minHeight: "44px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
           aria-label="Toggle menu"
         >
@@ -161,8 +166,8 @@ export function Navbar() {
 }
 
 export function StashLogo({ size = "default" }: { size?: "default" | "large" }) {
-  const fontSize = size === "large" ? "22px" : "18px";
-  const iconSize = size === "large" ? 28 : 22;
+  const fontSize = size === "large" ? "24px" : "21px";
+  const iconSize = size === "large" ? 30 : 26;
   const scale = iconSize / 28;
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "9px", fontWeight: 800, fontSize, letterSpacing: "-0.02em" }}>

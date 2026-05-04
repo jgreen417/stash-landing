@@ -37,7 +37,7 @@ export function TrustSecurity() {
   return (
     <section
       id="trust"
-      className="py-24 px-6"
+      className="py-16 md:py-24 px-6"
       ref={ref}
       style={{ background: "hsl(190 70% 25% / 0.03)" }}
     >
@@ -89,7 +89,7 @@ export function TrustSecurity() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {pillars.map((pillar, i) => {
             const Icon = pillar.icon;
             const xDir = i % 2 === 0 ? -20 : 20;
@@ -104,8 +104,8 @@ export function TrustSecurity() {
                   stiffness: 200,
                   damping: 22,
                 }}
-                whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-                className="p-6 rounded-2xl bg-white border border-border hover:border-primary/20 hover:shadow-md transition-shadow cursor-default"
+                whileHover={{ y: -3, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                className="p-4 md:p-5 rounded-xl md:rounded-2xl bg-white border border-border hover:border-primary/20 hover:shadow-md transition-shadow cursor-default"
               >
                 <motion.div
                   initial={{ scale: 0.4, rotate: -12, opacity: 0 }}
@@ -116,13 +116,13 @@ export function TrustSecurity() {
                     stiffness: 260,
                     damping: 16,
                   }}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                  className="w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-4"
                   style={{ background: "hsl(190 70% 25% / 0.08)" }}
                 >
-                  <Icon size={17} style={{ color: "hsl(190,70%,25%)" }} />
+                  <Icon size={14} className="md:w-[17px] md:h-[17px]" style={{ color: "hsl(190,70%,25%)" }} />
                 </motion.div>
-                <h3 className="font-semibold text-sm text-foreground mb-2">{pillar.title}</h3>
-                <p className="text-sm text-foreground/55 leading-relaxed">{pillar.body}</p>
+                <h3 className="font-semibold text-xs md:text-sm text-foreground mb-1.5 md:mb-2">{pillar.title}</h3>
+                <p className="text-xs md:text-sm text-foreground/55 leading-relaxed">{pillar.body}</p>
               </motion.div>
             );
           })}

@@ -1,9 +1,8 @@
 import { Hero } from "@/components/sections/Hero";
+import { TrustBar } from "@/components/sections/TrustBar";
 import { Problem } from "@/components/sections/Problem";
 import { Solution } from "@/components/sections/Solution";
-import { Features } from "@/components/sections/Features";
 import { TrustSecurity } from "@/components/sections/TrustSecurity";
-import { Audience } from "@/components/sections/Audience";
 import { Pricing } from "@/components/sections/Pricing";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Navbar } from "@/components/sections/Navbar";
@@ -15,11 +14,10 @@ export default function Home() {
       <Navbar />
       <main className="flex-1" style={{ position: "relative" }}>
         <Hero />
+        <TrustBar />
         <Problem />
         <Solution />
-        <Features />
         <TrustSecurity />
-        <Audience />
         <Pricing />
         <FinalCTA />
       </main>

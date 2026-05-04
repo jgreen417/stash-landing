@@ -38,23 +38,6 @@ const plans = [
     highlight: true,
     badge: "Most popular",
   },
-  {
-    name: "Family & Concierge",
-    priceNum: 24,
-    price: "$24",
-    period: "per month",
-    description: "Everything in Premium, plus human expert support for complex redemptions.",
-    features: [
-      "Everything in Premium",
-      "Up to 4 household members",
-      "Human expert consultations",
-      "Award flight search assistance",
-      "Dedicated redemption support",
-      "White-glove onboarding",
-    ],
-    cta: "Join waitlist",
-    highlight: false,
-  },
 ];
 
 function AnimatedPrice({ num, inView, highlight }: { num: number; inView: boolean; highlight: boolean }) {
@@ -66,6 +49,7 @@ function AnimatedPrice({ num, inView, highlight }: { num: number; inView: boolea
       const ctrl = animate(count, num, { duration: 0.9, ease: "easeOut", delay: 0.3 });
       return ctrl.stop;
     }
+    return;
   }, [inView, num, count]);
 
   if (num === 0) {
@@ -86,7 +70,7 @@ export function Pricing() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="pricing" className="py-24 px-6" ref={ref}>
+    <section id="pricing" className="py-16 md:py-24 px-6" ref={ref}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -105,7 +89,7 @@ export function Pricing() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start max-w-2xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
@@ -207,7 +191,7 @@ export function Pricing() {
                 href="#cta"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`text-sm font-semibold px-5 py-3 rounded-full text-center transition-all ${
+                className={`text-sm font-semibold px-5 py-4 rounded-full text-center transition-all ${
                   plan.highlight ? "bg-white text-foreground" : ""
                 }`}
                 style={!plan.highlight ? { color: "white", background: "hsl(190,70%,25%)" } : {}}
@@ -226,6 +210,23 @@ export function Pricing() {
         >
           All prices in AUD. Cancel anytime. No lock-in contracts.
         </motion.p>
+
+        {/* Concierge note */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="mt-8 text-center"
+        >
+          <div className="inline-block rounded-xl border border-border bg-white p-5">
+            <p className="text-sm font-semibold text-foreground mb-1">
+              Concierge tier — coming later
+            </p>
+            <p className="text-sm text-foreground/60 mb-0">
+              Dedicated rewards manager, white-glove service, human expert on demand.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,28 +1,50 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Zap, LayoutDashboard, Users } from "lucide-react";
+import {
+  Bot,
+  LayoutDashboard,
+  BellRing,
+  Route,
+  GitCompare,
+  Users,
+} from "lucide-react";
 
-const layers = [
+const items = [
   {
-    number: "01",
-    icon: Zap,
-    title: "AI guidance, instantly",
-    body: "Ask Stash anything about your cards, points, or perks. Get clear, factual answers in plain English — no jargon, no advice disclaimers, just the right information when you need it.",
-    detail: "Proactive alerts when something needs your attention.",
+    icon: Bot,
+    title: "Savvy AI",
+    body: "Ask about any card, point, or perk and get clear, factual answers — no jargon, just what matters.",
+    detail: "Knows your cards, spend, goals",
   },
   {
-    number: "02",
     icon: LayoutDashboard,
-    title: "Your rewards, unified",
-    body: "One dashboard for every card, loyalty account, and perk you hold. Stash connects the dots so you can see your full rewards picture in seconds — not hours.",
-    detail: "Tracks Qantas, Velocity, Amex, Hilton, IHG, and more.",
+    title: "Full dashboard",
+    body: "Every loyalty program, card, and perk in one place. Qantas, Velocity, Amex, Hilton, IHG, and more.",
+    detail: "No more app-switching",
   },
   {
-    number: "03",
+    icon: BellRing,
+    title: "Smart alerts",
+    body: "Never let points expire or perks lapse. Stash watches your accounts 24/7 and notifies you with time to act.",
+    detail: "Proactive, not reactive",
+  },
+  {
+    icon: Route,
+    title: "Best action feed",
+    body: "Transfer here, use this card, claim that perk. Timely, specific, ranked by what's worth your time.",
+    detail: "Shows your rewards gap in $",
+  },
+  {
+    icon: GitCompare,
+    title: "Compare + plan",
+    body: "Qantas vs Jetstar for your trip. Amex transfer vs cashback. Your real balances ranked by actual value.",
+    detail: "Plan with points you have",
+  },
+  {
     icon: Users,
-    title: "Human experts, when you need them",
-    body: "For complex redemptions, award flight searches, or maximising a large points balance — connect with a specialist who knows Australian programs inside out.",
-    detail: "Available on Premium and Family plans.",
+    title: "Human experts",
+    body: "For complex redemptions and card strategy — real specialists who know Australian programs inside out.",
+    detail: "Premium tier. Book on demand",
   },
 ];
 
@@ -33,7 +55,7 @@ export function Solution() {
   return (
     <section
       id="solution"
-      className="py-24 px-6"
+      className="py-20 md:py-24 px-6"
       style={{
         background:
           "linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(190 70% 25% / 0.04) 50%, hsl(40 33% 98%) 100%)",
@@ -44,81 +66,69 @@ export function Solution() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 block">
             How Stash works
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Your rewards copilot.<br />Three layers deep.
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-3 md:mb-4">
+            Your rewards copilot.<br />Six layers deep.
           </h2>
-          <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-            Most apps show you data. Stash tells you what to do with it — and backs it up when things get complex.
+          <p className="text-base md:text-lg text-foreground/60 max-w-xl mx-auto">
+            Track, compare, act, and ask — the only platform that does it all for Australian rewards.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Connector line draws itself */}
-          <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px overflow-hidden">
-            <div style={{ height: "1px", background: "hsl(40 20% 88%)", position: "absolute", inset: 0 }} />
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={inView ? { scaleX: 1 } : {}}
-              transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                position: "absolute", inset: 0, height: "1px",
-                background: "linear-gradient(to right, transparent, hsl(190,70%,25%), transparent)",
-                transformOrigin: "left",
-              }}
-            />
-          </div>
-
-          {layers.map((layer, i) => {
-            const Icon = layer.icon;
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
+          {items.map((item, i) => {
+            const Icon = item.icon;
             return (
               <motion.div
-                key={layer.number}
-                initial={{ opacity: 0, y: 40, scale: 0.94 }}
+                key={item.title}
+                initial={{ opacity: 0, y: 24, scale: 0.95 }}
                 animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{
-                  delay: i * 0.14,
-                  duration: 0.65,
+                  delay: i * 0.07,
+                  duration: 0.5,
                   type: "spring",
                   stiffness: 180,
                   damping: 22,
                 }}
-                whileHover={{ y: -6, transition: { type: "spring", stiffness: 280, damping: 18 } }}
-                className="relative flex flex-col cursor-default"
+                whileHover={{
+                  y: -4,
+                  boxShadow: "0 12px 32px rgba(0,0,0,0.08)",
+                  transition: { type: "spring", stiffness: 280, damping: 18 },
+                }}
+                className="p-4 md:p-5 rounded-xl md:rounded-2xl border border-border bg-white hover:border-primary/25 transition-colors cursor-default"
               >
-                <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-border shadow-sm hover:shadow-md hover:border-primary/25 transition-shadow">
-                  {/* Icon pops in with spring after card */}
-                  <motion.div
-                    initial={{ scale: 0.2, rotate: -20, opacity: 0 }}
-                    animate={inView ? { scale: 1, rotate: 0, opacity: 1 } : {}}
-                    transition={{
-                      delay: i * 0.14 + 0.2,
-                      type: "spring",
-                      stiffness: 280,
-                      damping: 16,
-                    }}
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 relative z-10"
-                    style={{ background: "hsl(190,70%,25%)", boxShadow: "0 4px 16px hsl(190 70% 25% / 0.3)" }}
-                  >
-                    <Icon size={22} className="text-white" />
-                  </motion.div>
-
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={inView ? { opacity: 1 } : {}}
-                    transition={{ delay: i * 0.14 + 0.35, duration: 0.4 }}
-                    className="text-xs font-bold text-foreground/25 tracking-widest mb-2"
-                  >
-                    {layer.number}
-                  </motion.span>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">{layer.title}</h3>
-                  <p className="text-sm text-foreground/60 leading-relaxed mb-4">{layer.body}</p>
-                  <span className="text-xs text-foreground/40 italic">{layer.detail}</span>
-                </div>
+                <motion.div
+                  initial={{ scale: 0.3, rotate: -18, opacity: 0 }}
+                  animate={inView ? { scale: 1, rotate: 0, opacity: 1 } : {}}
+                  transition={{
+                    delay: i * 0.07 + 0.12,
+                    type: "spring",
+                    stiffness: 250,
+                    damping: 16,
+                  }}
+                  className="w-9 h-9 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-4"
+                  style={{ background: "hsl(190 70% 25% / 0.08)" }}
+                >
+                  <Icon size={16} className="md:w-[19px] md:h-[19px]" style={{ color: "hsl(190,70%,25%)" }} />
+                </motion.div>
+                <h3 className="text-sm md:text-base font-semibold text-foreground mb-1.5 md:mb-2">{item.title}</h3>
+                <p className="text-xs md:text-sm text-foreground/60 leading-relaxed mb-2 md:mb-3">{item.body}</p>
+                <motion.span
+                  initial={{ opacity: 0, x: -6 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: i * 0.07 + 0.25, duration: 0.35 }}
+                  className="text-[11px] md:text-xs font-semibold px-2 py-0.5 md:px-3 md:py-1 rounded-full inline-block"
+                  style={{
+                    background: "hsl(45 80% 50% / 0.12)",
+                    color: "hsl(35,70%,35%)",
+                  }}
+                >
+                  {item.detail}
+                </motion.span>
               </motion.div>
             );
           })}
