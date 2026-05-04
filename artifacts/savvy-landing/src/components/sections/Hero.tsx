@@ -546,12 +546,14 @@ export function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Scene copy */}
-            <motion.div style={{ y: isMobile ? 0 : sceneY }}>
-              <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}>
-                <SceneCopy sceneIdx={sceneIdx} onSelectScene={(i) => { setSceneIdx(i); setTipIndex(i); }} />
+            {/* Scene copy — desktop only */}
+            {!isMobile && (
+              <motion.div style={{ y: isMobile ? 0 : sceneY }}>
+                <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}>
+                  <SceneCopy sceneIdx={sceneIdx} onSelectScene={(i) => { setSceneIdx(i); setTipIndex(i); }} />
+                </motion.div>
               </motion.div>
-            </motion.div>
+            )}
 
             {/* Mobile product preview — wallet card faces */}
             {isMobile && (
