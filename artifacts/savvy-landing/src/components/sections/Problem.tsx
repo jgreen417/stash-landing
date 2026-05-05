@@ -84,8 +84,8 @@ export function Problem() {
                 }}
                 className="p-6 rounded-2xl border hover:shadow-lg hover:border-primary/20 transition-colors cursor-default"
                 style={{
-                  background: "hsl(190 70% 25% / 0.04)",
-                  borderColor: "hsl(190 70% 25% / 0.1)",
+                  background: "hsl(190 70% 25% / 0.06)",
+                  borderColor: "hsl(190 70% 25% / 0.14)",
                 }}
               >
                 <motion.div
@@ -134,18 +134,17 @@ export function Problem() {
               { num: "38%", label: "Overspend on points", sub: "spend $715/mo extra chasing rewards" },
               { num: "89%", label: "Loyalty fraud surge", sub: "YoY increase — fastest-growing fraud type" },
             ].map((stat, i) => (
-              <motion.div
+                            <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 12 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.6 + i * 0.06, duration: 0.4 }}
-                className="text-center p-4 rounded-xl"
-                style={{ background: "hsl(190 70% 25% / 0.08)" }}
+                className="text-center py-4"
               >
                 <p className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight" style={{ color: "hsl(190,70%,25%)" }}>
                   {stat.num}
                 </p>
-                <p className="text-sm font-semibold text-foreground/70 mt-1">{stat.label}</p>
+                <p className="text-sm font-semibold text-foreground mt-1">{stat.label}</p>
                 <p className="text-xs text-muted-foreground mt-0.5">{stat.sub}</p>
               </motion.div>
             ))}

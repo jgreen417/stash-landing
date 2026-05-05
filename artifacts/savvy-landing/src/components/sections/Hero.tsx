@@ -537,7 +537,7 @@ export function Hero() {
             <motion.div style={{ y: isMobile ? 0 : subtextY }}>
               <motion.p
                 variants={fadeUp} initial="hidden" animate="show" custom={2}
-                style={{ fontSize: "17px", color: "hsl(30 8% 45%)", lineHeight: 1.65, marginBottom: "32px", maxWidth: "440px" }}
+                style={{ fontSize: "17px", color: "hsl(var(--muted-foreground))", lineHeight: 1.65, marginBottom: "32px", maxWidth: "440px" }}
               >
                 Your rewards copilot. Stash tracks points, vouchers, cashback, and offers — then tells you the next best action, every time.
               </motion.p>

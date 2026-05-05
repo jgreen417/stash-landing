@@ -73,7 +73,7 @@ export function Differentiators() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((d, i) => {
             const Icon = d.icon;
             return (
@@ -82,14 +82,7 @@ export function Differentiators() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="p-5 md:p-6 relative cursor-default"
-                style={{
-                  borderLeft: "3px solid hsl(190 70% 25% / 0.15)",
-                  borderRadius: 0,
-                  transition: "background 0.25s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "hsl(190 70% 25% / 0.04)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+                className="p-6 md:p-8 relative bg-white/80 dark:bg-card/80 backdrop-blur-md border border-border rounded-3xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white dark:hover:bg-card" 
               >
                 <motion.div
                   initial={{ opacity: 0, x: -8, scale: 0.8 }}
@@ -99,7 +92,7 @@ export function Differentiators() {
                     duration: 0.4,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="mb-3"
+                  className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-900/5"
                 >
                   <Icon size={20} style={{ color: "hsl(190,70%,25%)" }} />
                 </motion.div>

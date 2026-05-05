@@ -3,7 +3,6 @@ import { StashLogo } from "./Navbar";
 export function Footer() {
   const links = {
     Product: ["How it works", "Trust & Security"],
-    Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
   };
 
   const anchorHrefs: Record<string, string> = {

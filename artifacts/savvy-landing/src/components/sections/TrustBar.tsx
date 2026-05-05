@@ -23,7 +23,7 @@ export function TrustBar() {
           className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10"
         >
           <span className="text-xs font-semibold uppercase tracking-widest text-secondary whitespace-nowrap">
-            Works with
+            Built For
           </span>
 
           <div className="flex items-center gap-3 md:gap-5 flex-wrap justify-center">
