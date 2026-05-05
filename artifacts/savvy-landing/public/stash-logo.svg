@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" fill="none">
+  <!-- Icon -->
+  <g transform="translate(0, 20)">
+    <!-- Left card (tilted) -->
+    <rect x="1" y="4" width="10.5" height="7" rx="1.4" fill="hsl(190,55%,40%)" transform="rotate(-16 6.25 7.5)" />
+    <!-- Center card (straight) -->
+    <rect x="8.75" y="0" width="10.5" height="7" rx="1.4" fill="hsl(45,80%,52%)" />
+    <!-- Right card (tilted) -->
+    <rect x="16.5" y="4" width="10.5" height="7" rx="1.4" fill="hsl(190,70%,25%)" transform="rotate(16 21.75 7.5)" />
+    <!-- Chest lid -->
+    <rect x="2" y="9.5" width="24" height="5.5" rx="3" fill="hsl(190,58%,30%)" />
+    <!-- Chest body -->
+    <rect x="2" y="13" width="24" height="11" rx="3" fill="hsl(190,70%,25%)" />
+    <!-- Lid/body seam -->
+    <rect x="2" y="14.5" width="24" height="0.75" fill="rgba(0,0,0,0.14)" />
+    <!-- Gold latch -->
+    <rect x="10.5" y="15.5" width="7" height="5" rx="1.6" fill="hsl(45,80%,50%)" />
+    <!-- Latch shine -->
+    <rect x="10.5" y="15.5" width="7" height="2.2" rx="1.6" fill="rgba(255,255,255,0.28)" />
+  </g>
+  <!-- Text -->
+  <text x="42" y="44" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="34" font-weight="800" letter-spacing="-0.02em" fill="hsl(190,70%,25%)">stash</text>
+</svg>
