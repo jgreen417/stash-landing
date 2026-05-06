@@ -9,6 +9,8 @@ import {
   MotionValue,
 } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import Particles from "@/components/Particles";
+import { supabase } from "../../lib/supabase";
 import {
   ArrowRight,
   TrendingUp,
@@ -260,8 +262,15 @@ function PhoneMockup({ walletY, walletOpacity, tipIndex }: PhoneProps) {
             {tipIndex >= 0 && (
               <motion.div
                 key={tipIndex}
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 6, boxShadow: "0 0 0px rgba(42,157,143,0)" }}
+                animate={{
+                  opacity: 1, y: 0,
+                  boxShadow: [
+                    "0 0 0px rgba(42,157,143,0)",
+                    "0 0 22px rgba(42,157,143,0.4)",
+                    "0 0 0px rgba(42,157,143,0)",
+                  ],
+                }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
@@ -310,10 +319,10 @@ function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; on
         {sceneIdx >= 0 ? (
           <motion.div
             key={sceneIdx}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             style={{ display: "flex", alignItems: "center", gap: isMobile ? "8px" : "0" }}
           >
             {isMobile && (
@@ -357,7 +366,7 @@ function SceneCopy({ sceneIdx, onSelectScene, isMobile }: { sceneIdx: number; on
           <motion.div
             key="trust"
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -8 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             style={{ display: "flex", flexDirection: "column", gap: "10px" }}
           >
@@ -406,8 +415,22 @@ export function Hero() {
     offset: ["start start", "end end"],
   });
 
-  const [tipIndex, setTipIndex] = useState(-1);
-  const [sceneIdx, setSceneIdx] = useState(-1);
+  const [tipIndex, setTipIndex] = useState(() =>
+    window.matchMedia("(max-width: 767px)").matches ? 0 : -1
+  );
+  const [sceneIdx, setSceneIdx] = useState(() =>
+    window.matchMedia("(max-width: 767px)").matches ? 0 : -1
+  );
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  // ── Fetch live waitlist count ──
+  useEffect(() => {
+    if (!supabase) return;
+    supabase
+      .from("waitlist")
+      .select("*", { count: "exact", head: true })
+      .then(({ count }) => setWaitlistCount(count ?? null));
+  }, []);
 
   // Auto-advance carousel on mobile
   useEffect(() => {
@@ -462,11 +485,12 @@ export function Hero() {
   const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (isMobile) return;
     let idx: number;
     if (v < 0.05) idx = -1;
-    else if (v < 0.26) idx = 0;
-    else if (v < 0.44) idx = 1;
-    else if (v < 0.62) idx = 2;
+    else if (v < 0.32) idx = 0;
+    else if (v < 0.52) idx = 1;
+    else if (v < 0.70) idx = 2;
     else idx = 3;
     setTipIndex(idx);
     setSceneIdx(idx);
@@ -491,9 +515,21 @@ export function Hero() {
           }}
         />
 
+        {/* Particles — floating teal/gold atmosphere */}
+        {!prefersReducedMotion && (
+          <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
+            <Particles
+              particleCount={35}
+              color1="#1a7a6e"
+              color2="#E9B640"
+              speed={0.4}
+            />
+          </div>
+        )}
+
         <div
           className="max-w-6xl mx-auto w-full px-6"
-          style={{ display: "flex", alignItems: "center", gap: "56px", justifyContent: "center" }}
+          style={{ display: "flex", alignItems: "center", gap: "56px", justifyContent: "center", position: "relative" }}
         >
           {/* ── Left column ── */}
           <div style={{ flex: 1, maxWidth: "520px" }}>
@@ -514,7 +550,9 @@ export function Hero() {
                   transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
                   style={{ width: "8px", height: "8px", borderRadius: "50%", background: "hsl(45,80%,50%)", display: "inline-block" }}
                 />
-                Join our private waitlist
+                {waitlistCount !== null
+                  ? `Join ${waitlistCount.toLocaleString()} others making every point count`
+                  : "Join our private waitlist"}
               </motion.div>
             </motion.div>
 
